@@ -16,7 +16,6 @@ Vue.filter('moneyFormat', num => {
   }
 })
 Vue.filter('timestampToTime',(timestamp,item)=>{
-  debugger
   if(isEmpty(timestamp)) return ''
   if(item.dataType === '08'){
     return moment(timestamp).format('YYYY-MM-DD')

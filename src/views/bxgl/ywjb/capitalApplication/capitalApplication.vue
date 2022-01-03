@@ -35,6 +35,8 @@
       </arTab>
       <div class="table">
         <arTable></arTable>
+        <el-pagination :current-page="1" :page-sizes="[10, 20, 50, 100, 500]" :page-size="10" layout="total, prev, pager, next, sizes" :total="0">
+        </el-pagination>
       </div>
     </div>
   </div>

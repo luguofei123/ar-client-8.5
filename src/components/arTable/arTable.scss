@@ -1,0 +1,43 @@
+// 表格公用部分
+$borderColor: #bbb;
+$blurColor: #0066ff;
+$focusColor: #0066ff;
+$fontSize: 14px;
+$RowHeight: 36px;
+$hoverBgColor: rgba(0, 102, 255, 0.1);
+// 表格头部
+$bgColorHeader: #eee;
+$colorHeader: #333;
+// 表格中部
+$bgColorBodyEven: rgba(0, 102, 255, 0.05);
+$bgColorBodyExpandRow: #f9f9f9;
+// $colorBody: rgba(0, 0, 0, 0.85);
+$colorBody: #333;
+$editBorderColor: #0066ff;
+// 表格尾部
+.plTableBox {
+  .elx-table--main-wrapper {
+    // 头部
+    .elx-table--header-wrapper.body--wrapper {
+      table > thead > tr {
+        background-color: $bgColorHeader;
+        th {
+          height: $RowHeight;
+        }
+      }
+    }
+    .elx-table--body-wrapper.body--wrapper {
+      table > tbody > tr {
+        &:nth-child(2n) {
+          background-color: $bgColorBodyEven;
+        }
+        td {
+          height: $RowHeight;
+        }
+      }
+      table > tbody > tr.row--hover {
+        background-color: $hoverBgColor;
+      }
+    }
+  }
+}

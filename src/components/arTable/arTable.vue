@@ -58,8 +58,4 @@ export default {
   }
 }
 </script>
-<style>
-/* .editTable .edit-table .elx-table .elx-cell {
-  padding-left: 0 !important;
-} */
-</style>
+<style lang="scss" src="./arTable.scss"></style>

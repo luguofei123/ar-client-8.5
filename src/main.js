@@ -70,7 +70,8 @@ import {
   Transfer,
   Loading,
   MessageBox,
-  Notification
+  Notification,
+  Pagination
 } from 'element-ui'
 Vue.use(Dialog)
 Vue.use(Autocomplete)
@@ -126,6 +127,7 @@ Vue.use(CollapseItem)
 Vue.use(Cascader)
 Vue.use(ColorPicker)
 Vue.use(Transfer)
+Vue.use(Pagination)
 Vue.use(Loading.directive)
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
