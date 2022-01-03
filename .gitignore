@@ -1,0 +1,11 @@
+/.idea/
+/node_modules/
+/ar/
+/dist/
+/index.html/
+/config/index.js/
+.DS_Store
+*/.DS_Store
+package-lock.json
+.cache/
+dist.zip
