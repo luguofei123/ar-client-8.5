@@ -31,13 +31,16 @@ $editBorderColor: #0066ff;
         &:nth-child(2n) {
           background-color: $bgColorBodyEven;
         }
+        &.row--hover {
+          background-color: $hoverBgColor;
+        }
         td {
           height: $RowHeight;
         }
       }
-      table > tbody > tr.row--hover {
-        background-color: $hoverBgColor;
-      }
+      // table > tbody > tr.row--hover {
+      //   background-color: $hoverBgColor;
+      // }
     }
   }
 }

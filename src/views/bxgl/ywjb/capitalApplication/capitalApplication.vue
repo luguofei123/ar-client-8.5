@@ -35,6 +35,8 @@
       </arTab>
       <div class="table">
         <arTable></arTable>
+      </div>
+      <div class="pagination">
         <el-pagination :current-page="1" :page-sizes="[10, 20, 50, 100, 500]" :page-size="10" layout="total, prev, pager, next, sizes" :total="0">
         </el-pagination>
       </div>
@@ -123,6 +125,12 @@ export default {
     border-radius: 3px;
     box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 20%);
     .table {
+      margin-top: 10px;
+    }
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: -20px;
       margin-top: 10px;
     }
   }
