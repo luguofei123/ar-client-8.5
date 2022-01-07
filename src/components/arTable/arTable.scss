@@ -16,6 +16,7 @@ $colorBody: #333;
 $editBorderColor: #0066ff;
 // 表格尾部
 .plTableBox {
+  // 主体部分
   .elx-table--main-wrapper {
     // 头部
     .elx-table--header-wrapper.body--wrapper {
@@ -26,6 +27,7 @@ $editBorderColor: #0066ff;
         }
       }
     }
+    // 内容
     .elx-table--body-wrapper.body--wrapper {
       table > tbody > tr {
         &:nth-child(2n) {
@@ -36,11 +38,63 @@ $editBorderColor: #0066ff;
         }
         td {
           height: $RowHeight;
+          input {
+            border: none;
+            background: transparent;
+          }
         }
       }
-      // table > tbody > tr.row--hover {
-      //   background-color: $hoverBgColor;
-      // }
+    }
+  }
+  // 固定部分
+  .elx-table--fixed-wrapper {
+    // 右侧固定部分
+    .elx-table--fixed-right-wrapper {
+      .elx-table--header-wrapper.fixed-right--wrapper {
+        table > thead > tr {
+          background-color: $bgColorHeader;
+          th {
+            height: $RowHeight;
+          }
+        }
+      }
+      .elx-table--body-wrapper.fixed-right--wrapper {
+        table > tbody > tr {
+          &:nth-child(2n) {
+            background-color: $bgColorBodyEven;
+          }
+          &.row--hover {
+            background-color: $hoverBgColor;
+          }
+          td {
+            height: $RowHeight;
+          }
+        }
+      }
+    }
+    // 左侧固定部分
+    .elx-table--fixed-left-wrapper {
+      .elx-table--header-wrapper.fixed-left--wrapper {
+        table > thead > tr {
+          background-color: $bgColorHeader;
+          th {
+            height: $RowHeight;
+          }
+        }
+      }
+      .elx-table--body-wrapper.fixed-left--wrapper {
+        table > tbody > tr {
+          &:nth-child(2n) {
+            background-color: $bgColorBodyEven;
+          }
+          &.row--hover {
+            background-color: $hoverBgColor;
+          }
+          td {
+            height: $RowHeight;
+          }
+        }
+      }
     }
   }
 }

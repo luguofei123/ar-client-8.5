@@ -1,10 +1,10 @@
 <template>
-  <ux-table-column :field="item.arField" align="center" title="item.infoName" edit-render>
+  <ux-table-column :field="item.arField" align="center" title="item.infoName" :min-width="item.rowNum ? item.rowNum : '150px'" edit-render>
     <template v-slot:header>
       <i class="must" v-if="item.isNotEmpty === 'Y'">*</i><span>{{ item.infoName }}</span></template
     >
     <template v-slot:edit="scope">
-      <tableCell :scope="scope" :item="item"></tableCell>
+      <tableCell :scope="scope" :item="item" @tdChange="tdChange"></tableCell>
     </template>
     <template v-slot="{ row }">
       <span>
@@ -21,6 +21,11 @@ export default {
   props: ['item'],
   data() {
     return {}
+  },
+  methods: {
+    tdChange(obj) {
+      this.$emit('tdChange', obj)
+    }
   },
   components: {
     tableCell
