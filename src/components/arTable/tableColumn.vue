@@ -1,5 +1,5 @@
 <template>
-  <ux-table-column :field="item.arField" align="center" title="item.infoName" :min-width="item.rowNum ? item.rowNum : '150px'" edit-render>
+  <ux-table-column :field="item.arField" align="center" title="item.infoName" :min-width="item.rowNum ? item.rowNum : '150px'" :resizable="true" edit-render>
     <template v-slot:header>
       <i class="must" v-if="item.isNotEmpty === 'Y'">*</i><span>{{ item.infoName }}</span></template
     >
@@ -7,10 +7,8 @@
       <tableCell :scope="scope" :item="item" @tdChange="tdChange"></tableCell>
     </template>
     <template v-slot="{ row }">
-      <span>
-        <template v-if="item.dataType === '01'">{{ row[item.arField] }}</template>
-        <template v-if="item.dataType === '08' || item.dataType === '10'">{{ row[item.arField] | timestampToTime(item) }}</template>
-      </span>
+      <span v-if="item.dataType === '01'">{{ row[item.arField] }}</span>
+      <span v-if="item.dataType === '08' || item.dataType === '10'">{{ row[item.arField] | timestampToTime(item) }}</span>
     </template>
   </ux-table-column>
 </template>

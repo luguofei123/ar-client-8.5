@@ -24,6 +24,8 @@ $editBorderColor: #0066ff;
         background-color: $bgColorHeader;
         th {
           height: $RowHeight;
+          color: $colorHeader;
+          font-weight: normal;
         }
       }
     }
@@ -38,6 +40,7 @@ $editBorderColor: #0066ff;
         }
         td {
           height: $RowHeight;
+          color: $colorBody;
           input {
             border: none;
             background: transparent;
@@ -96,5 +99,20 @@ $editBorderColor: #0066ff;
         }
       }
     }
+  }
+  // 边框线
+  .elx-table.border--full .elx-body--column,
+  .elx-table.border--full .elx-footer--column,
+  .elx-table.border--full .elx-header--column {
+    background-image: linear-gradient($borderColor, $borderColor), linear-gradient($borderColor, $borderColor);
+  }
+  .elx-table .elx-table--header-wrapper .elx-table--header-border-line {
+    border-bottom: 1px solid $borderColor;
+  }
+  .elx-table .elx-table--border-line {
+    border: 1px solid $borderColor;
+  }
+  .elx-table.border--full .elx-table--fixed-left-wrapper {
+    border-right: 1px solid $borderColor;
   }
 }

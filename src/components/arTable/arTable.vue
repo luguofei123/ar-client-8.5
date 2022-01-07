@@ -1,6 +1,15 @@
 <template>
   <div>
-    <ux-grid :data="tableData" border keep-source :edit-config="{ trigger: 'click', mode: 'cell', showIcon: false }" widthResize>
+    <ux-grid
+      :data="tableData"
+      border
+      stripe
+      keep-source
+      :edit-config="{ trigger: 'click', mode: 'cell', showIcon: false }"
+      show-overflow
+      show-header-overflow
+      widthResize
+    >
       <ux-table-column fixed="left" type="checkbox" header-align="center" align="center" width="50" v-if="isShowCheckbox"> </ux-table-column>
       <ux-table-column fixed="left" type="index" header-align="center" align="center" width="50" title="序号" v-if="isShowIndex"></ux-table-column>
       <template v-for="(item, index) in columnList">
