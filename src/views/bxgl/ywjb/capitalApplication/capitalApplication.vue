@@ -47,6 +47,7 @@
 import carousel from '../../../../components/carousel'
 import arTable from '../../../../components/arTable/arTable.vue'
 import arTab from '../../../../components/arTab.vue'
+import { getUserCommonBillType } from './capitalApplictionAPI'
 export default {
   data() {
     return {
@@ -284,6 +285,7 @@ export default {
   },
   mounted() {
     this.carouselWidth = this.$refs['scroll-content'].offsetWidth
+    getUserCommonBillType()
   },
   methods: {
     tdChange(obj) {

@@ -129,7 +129,7 @@ Vue.use(ColorPicker)
 Vue.use(Transfer)
 Vue.use(Pagination)
 Vue.use(Loading.directive)
-Vue.prototype.$loading = Loading.service
+Vue.prototype.$loadingService = Loading.service
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
