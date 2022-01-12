@@ -34,7 +34,6 @@ function closeLoading() {
 // http请求拦截器 主要是对请求参数的设置
 instance.interceptors.request.use(
   request => {
-    debugger
     if (
       request.url.includes('fbpm-modeler') ||
       request.url.includes('fbpm-process') ||
@@ -78,7 +77,6 @@ instance.interceptors.request.use(
 
 // http响应拦截器
 instance.interceptors.response.use(response => {
-  debugger
   if (response.status == '200' || response.status == '201') {
     closeLoading()
     return response

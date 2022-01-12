@@ -37,7 +37,15 @@
         <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="true" :isShowIndex="true"></arTable>
       </div>
       <div class="pagination">
-        <el-pagination :current-page="currentPage" :page-sizes="pageSizes" :page-size="pageSize" layout="total, prev, pager, next, sizes" :total="total">
+        <el-pagination
+          @size-change="sizeChange"
+          @current-change="currentChange"
+          :current-page="currentPage"
+          :page-sizes="pageSizes"
+          :page-size="pageSize"
+          layout="total, prev, pager, next, sizes"
+          :total="total"
+        >
         </el-pagination>
       </div>
     </div>
@@ -335,10 +343,30 @@ export default {
       capitalApplication.getTableData(param).then(res => {
         if (res.data.flag === 'SUCCESS') {
           let result = res.data.data.content
-          this.tableData = result
-          this.total = res.data.data.totalElements
+          if (item.sourceCode === 'HOME_BG') {
+            this.tableData = this.doPageByFront(result, this.pageSize, this.currentPage)
+            this.total = result.length
+          } else {
+            this.tableData = result
+            this.total = res.data.data.totalElements
+          }
         }
       })
+    },
+    // 前端分页
+    doPageByFront(data, pageSize, currentPage) {
+      console.log(data, pageSize, currentPage)
+      return data.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+    },
+    // 分页条数改变
+    sizeChange(val) {
+      this.pageSize = val
+      this.getTableData(this.currentTab)
+    },
+    // 当前页码改变
+    currentChange(val) {
+      this.currentPage = val
+      this.getTableData(this.currentTab)
     }
   },
   components: {
