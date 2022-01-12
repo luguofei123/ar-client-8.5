@@ -9,23 +9,23 @@
           <img class="img-size-14" src="../../../../assets/img/private_set.png" alt="" />
         </p>
         <div ref="scroll-content">
-          <carousel :carouselArr="carouselArr" :carouselWidth="carouselWidth" :carouselSize="6"> </carousel>
+          <carousel :carouselArr="carouselArrObj['APPLY']" :carouselWidth="carouselWidth" :carouselSize="6"> </carousel>
         </div>
       </div>
       <div class="card">
         <p>
           <img class="img-size-14" src="../../../../assets/img/capital_icon_blue.png" alt="" />
-          <b>资金申请</b>
-          <span>事前申请业务</span>
+          <b>费用报销</b>
+          <span>直接业务报销</span>
           <img class="img-size-14" src="../../../../assets/img/private_set.png" alt="" />
         </p>
         <div ref="scroll-content">
-          <carousel :carouselArr="carouselArr" :carouselWidth="carouselWidth" :carouselSize="6"> </carousel>
+          <carousel :carouselArr="carouselArrObj['EXP']" :carouselWidth="carouselWidth" :carouselSize="6"> </carousel>
         </div>
       </div>
     </div>
     <div class="cap_tap">
-      <arTab>
+      <arTab :tabList="tabList">
         <div style="display: flex">
           <el-button style="margin-right: 10px">委托收单</el-button>
           <el-input class="w-300" v-model="test">
@@ -47,26 +47,13 @@
 import carousel from '../../../../components/carousel'
 import arTable from '../../../../components/arTable/arTable.vue'
 import arTab from '../../../../components/arTab.vue'
-import { getUserCommonBillType } from './capitalApplictionAPI'
+import { capitalApplication } from './capitalApplictionAPI'
 export default {
   data() {
     return {
-      carouselArr: [
-        { id: 1, name: '差旅费申请1' },
-        { id: 2, name: '差旅费申请2' },
-        { id: 3, name: '差旅费申请3' },
-        { id: 4, name: '差旅费申请4' },
-        { id: 5, name: '差旅费申请5' },
-        { id: 6, name: '差旅费申请6' },
-        { id: 7, name: '差旅费申请7' },
-        { id: 8, name: '差旅费申请8' },
-        { id: 9, name: '差旅费申请9' },
-        { id: 10, name: '差旅费申请10' },
-        { id: 11, name: '差旅费申请11' },
-        { id: 12, name: '差旅费申请12' },
-        { id: 13, name: '差旅费申请13' }
-      ],
+      carouselArrObj: {},
       carouselWidth: 0,
+      tabList: [],
       test: '',
       tableData: [{ expenseType: 'hahha', real: '好的的额', startTime: '', startTimes: null }, {}, {}],
       tableColumn: [
@@ -285,12 +272,27 @@ export default {
   },
   mounted() {
     this.carouselWidth = this.$refs['scroll-content'].offsetWidth
-    getUserCommonBillType()
+    this.initCarousle()
+    this.initTabs()
   },
   methods: {
     tdChange(obj) {
       this.$set(this.tableData[obj.rowIndex], obj.field, obj.value)
       console.log(obj)
+    },
+    initCarousle() {
+      capitalApplication.getUserCommonBillType().then(res => {
+        if (res.data.flag === 'SUCCESS') {
+          this.carouselArrObj = res.data.data
+        }
+      })
+    },
+    initTabs() {
+      capitalApplication.getArBusinssTabs().then(res => {
+        if (res.data.flag === 'SUCCESS') {
+          this.tabList = res.data.data
+        }
+      })
     }
   },
   components: {

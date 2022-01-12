@@ -15,16 +15,17 @@ export default {
   name: 'arTab',
   data() {
     return {
-      tabList: [
-        { name: '页面设置1', id: '1231' },
-        { name: '页面设置2', id: '1232' },
-        { name: '页面设置3', id: '1233' },
-        { name: '页面设置4', id: '1234' }
-      ],
       currentIndex: 0
     }
   },
-  props: {},
+  props: {
+    tabList: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   methods: {
     tabClick(item, index) {
       this.currentIndex = index

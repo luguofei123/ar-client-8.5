@@ -10,12 +10,12 @@
     <div ref="scroll-box-wrap" class="scroll-box-wrap" :style="{ width: carouselWidth * (carouselArrNew.length + 1) + 'px' }">
       <div v-for="(arr, index) in carouselArrNew" :key="index">
         <ul :style="{ width: carouselWidth + 'px' }">
-          <li v-for="item in arr" :key="item.id">{{ item.name }}</li>
+          <li v-for="item in arr" :key="item.id" :title="item.billName">{{ item.billName }}</li>
         </ul>
       </div>
       <div v-for="(arr, index) in carouselArrNew" :key="index + 'a'">
         <ul :style="{ width: carouselWidth + 'px' }" v-if="index === 0">
-          <li v-for="item in arr" :key="item.id">{{ item.name }}</li>
+          <li v-for="item in arr" :key="item.id">{{ item.billName }}</li>
         </ul>
       </div>
     </div>
@@ -179,6 +179,9 @@ export default {
         margin: 8px 0;
         margin-left: 20%;
         text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         cursor: pointer;
         &::before {
           content: '';
