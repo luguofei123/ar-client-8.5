@@ -9,6 +9,13 @@ export const capitalApplication = {
   },
   // 获取tab页签
   getArBusinssTabs(){
-    return myAxios.post('/sysset/arsysdatasource/getSourceInfoByTabName/AR_BUSINESS_TABS')
+    return myAxios.get('/sysset/arsysdatasource/getSourceInfoByTabName/AR_BUSINESS_TABS')
+  },
+  // 获取表格列
+  getTableColumn(obj){
+    return myAxios.get(`/sysset/arsystabcol/getTabAndCol/${obj.sourceCode}`)
+  },
+  getTableData(param){
+    return myAxios.post('/bill/arBillReport/getArBillReport',param)
   }
 }

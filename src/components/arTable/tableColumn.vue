@@ -1,5 +1,12 @@
 <template>
-  <ux-table-column :field="item.arField" align="center" title="item.infoName" :min-width="item.rowNum ? item.rowNum : '150px'" :resizable="true" edit-render>
+  <ux-table-column
+    :field="item.arField"
+    align="center"
+    title="item.infoName"
+    :min-width="item.rowNum ? item.rowNum : '150px'"
+    :resizable="true"
+    :edit-render="isEdit"
+  >
     <template v-slot:header>
       <i class="must" v-if="item.isNotEmpty === 'Y'">*</i><span>{{ item.infoName }}</span></template
     >
@@ -16,7 +23,7 @@
 import tableCell from './tableCell.vue'
 export default {
   name: 'tableColumn',
-  props: ['item'],
+  props: ['item', 'isEdit'],
   data() {
     return {}
   },

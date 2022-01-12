@@ -2,7 +2,7 @@
   <div class="tabBox">
     <div class="tab">
       <span v-for="(item, index) in tabList" :key="index" @click="tabClick(item, index)" :class="[currentIndex === index ? 'currentClass' : '']">{{
-        item.name
+        item.sourceName
       }}</span>
     </div>
     <!-- 按钮组或搜索框 -->
@@ -29,6 +29,7 @@ export default {
   methods: {
     tabClick(item, index) {
       this.currentIndex = index
+      this.$emit('tabClick', item)
     }
   },
   mounted() {},

@@ -25,19 +25,19 @@
       </div>
     </div>
     <div class="cap_tap">
-      <arTab :tabList="tabList">
+      <arTab :tabList="tabList" @tabClick="tabClick">
         <div style="display: flex">
           <el-button style="margin-right: 10px">委托收单</el-button>
-          <el-input class="w-300" v-model="test">
+          <el-input class="w-300" v-model="searchKeyWord">
             <i slot="suffix" class="iconfont iconsousuo"></i>
           </el-input>
         </div>
       </arTab>
       <div class="table">
-        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isShowCheckbox="true" :isShowIndex="true"></arTable>
+        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="true" :isShowIndex="true"></arTable>
       </div>
       <div class="pagination">
-        <el-pagination :current-page="1" :page-sizes="[10, 20, 50, 100, 500]" :page-size="10" layout="total, prev, pager, next, sizes" :total="0">
+        <el-pagination :current-page="currentPage" :page-sizes="pageSizes" :page-size="pageSize" layout="total, prev, pager, next, sizes" :total="total">
         </el-pagination>
       </div>
     </div>
@@ -54,8 +54,13 @@ export default {
       carouselArrObj: {},
       carouselWidth: 0,
       tabList: [],
-      test: '',
-      tableData: [{ expenseType: 'hahha', real: '好的的额', startTime: '', startTimes: null }, {}, {}],
+      currentTab: {},
+      searchKeyWord: '',
+      currentPage: 1,
+      pageSizes: [10, 20, 50, 100, 500],
+      pageSize: 10,
+      total: 0,
+      tableData: [],
       tableColumn: [
         {
           dataType: '01',
@@ -291,6 +296,47 @@ export default {
       capitalApplication.getArBusinssTabs().then(res => {
         if (res.data.flag === 'SUCCESS') {
           this.tabList = res.data.data
+          this.currentTab = this.tabList[0]
+          this.getTableColumn(this.currentTab)
+        }
+      })
+    },
+    tabClick(item) {
+      this.currentTab = item
+      this.getTableColumn(this.currentTab)
+    },
+    getTableColumn(item) {
+      capitalApplication.getTableColumn(item).then(res => {
+        if (res.data.flag === 'SUCCESS') {
+          let result = res.data.data.cols
+          result.forEach((item, index) => {
+            if (item.dataType === 'TEXT') {
+              item.dataType = '01'
+            }
+            item.arField = item.dataItem
+            item.infoName = item.dataItemNa
+          })
+          this.tableColumn = result
+          this.getTableData(item)
+        }
+      })
+    },
+    getTableData(item) {
+      let param = {
+        endDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
+        limit: this.pageSize,
+        offset: this.currentPage,
+        reportType: item.sourceCode,
+        roleIdLs: this.$getCommonData.svRoleId,
+        searchKeyWord: this.searchKeyWord,
+        startDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
+        userId: this.$getCommonData.svUserCode
+      }
+      capitalApplication.getTableData(param).then(res => {
+        if (res.data.flag === 'SUCCESS') {
+          let result = res.data.data.content
+          this.tableData = result
+          this.total = res.data.data.totalElements
         }
       })
     }

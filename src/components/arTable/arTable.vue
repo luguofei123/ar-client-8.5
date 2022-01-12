@@ -13,7 +13,7 @@
       <ux-table-column fixed="left" type="checkbox" header-align="center" align="center" width="50" v-if="isShowCheckbox"> </ux-table-column>
       <ux-table-column fixed="left" type="index" header-align="center" align="center" width="50" title="序号" v-if="isShowIndex"></ux-table-column>
       <template v-for="(item, index) in columnList">
-        <tableColumn :key="index" :item="item" @tdChange="tdChange"></tableColumn>
+        <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit"></tableColumn>
       </template>
       <ux-table-column fixed="right" header-align="center" align="center" title="操作" width="120">
         <template>
@@ -33,7 +33,7 @@ export default {
   data() {
     return {}
   },
-  props: ['isShowCheckbox', 'isShowIndex', 'columnList', 'tableData'],
+  props: ['isShowCheckbox', 'isShowIndex', 'columnList', 'tableData', 'isEdit'],
   methods: {
     tdChange(obj) {
       this.$emit('tdChange', obj)

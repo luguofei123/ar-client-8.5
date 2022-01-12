@@ -10,6 +10,8 @@ import '@/assets/css/reset.scss'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/common.scss'
 import { UxGrid, UxTableColumn } from 'umy-ui' // umy表格
+import {getCommonData} from './service/api/commonData'
+Vue.prototype.$getCommonData = getCommonData()
 Vue.use(UxGrid)
 Vue.use(UxTableColumn)
 Vue.config.productionTip = false
