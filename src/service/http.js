@@ -46,7 +46,7 @@ instance.interceptors.request.use(
       request.url = request.url.replace('/A/ar/api', '')
     }
     if (process.env.NODE_ENV === 'development') {
-      request.headers.tokenid = '800968096'
+      request.headers.tokenid = '1425178'
     }
     if (request.method === 'get') {
       request.params = {
@@ -88,11 +88,12 @@ instance.interceptors.response.use(response => {
 error => {
   closeLoading()
   if (error.response) {
+    debugger
     switch (error.response.status) {
       // 返回 401 清除token信息并跳转到登录页面
       case 401: {
         console.log('路由跳转')
-        if (process.env.NODE_ENV !== 'development') {
+        if (process.env.NODE_ENV == 'development') {
           window.parent.location.href = '/pf/portal/login/login.html'
         }
         closeLoading()

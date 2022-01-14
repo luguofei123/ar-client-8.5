@@ -15,6 +15,7 @@ export const capitalApplication = {
   getTableColumn(obj){
     return myAxios.get(`/sysset/arsystabcol/getTabAndCol/${obj.sourceCode}`)
   },
+  // 获取table数据
   getTableData(param){
     return myAxios.post('/bill/arBillReport/getArBillReport',param)
   }

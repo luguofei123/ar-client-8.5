@@ -79,3 +79,21 @@ $borderColor: #06f;
     cursor: pointer;
   }
 }
+// 对话框样式重写
+.el-dialog {
+  .el-dialog__header {
+    background: #f3f3f3;
+    padding: 10px;
+    .el-dialog__title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .el-dialog__headerbtn {
+      top: 15px;
+      right: 15px;
+    }
+  }
+  .el-dialog__body {
+    padding: 10px 15px;
+  }
+}

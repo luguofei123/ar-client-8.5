@@ -6,10 +6,10 @@
           <img class="img-size-14" src="../../../../assets/img/capital_icon_blue.png" alt="" />
           <b>资金申请</b>
           <span>事前申请业务</span>
-          <img class="img-size-14" src="../../../../assets/img/private_set.png" alt="" />
+          <img class="img-size-14" @click="settingLabel('APPLY')" src="../../../../assets/img/private_set.png" alt="" />
         </p>
         <div ref="scroll-content">
-          <carousel :carouselArr="carouselArrObj['APPLY']" :carouselWidth="carouselWidth" :carouselSize="6"> </carousel>
+          <arCarousel :carouselArr="carouselArrObj['APPLY']" :carouselWidth="carouselWidth" :carouselSize="6"> </arCarousel>
         </div>
       </div>
       <div class="card">
@@ -17,10 +17,10 @@
           <img class="img-size-14" src="../../../../assets/img/capital_icon_blue.png" alt="" />
           <b>费用报销</b>
           <span>直接业务报销</span>
-          <img class="img-size-14" src="../../../../assets/img/private_set.png" alt="" />
+          <img class="img-size-14" @click="settingLabel('EXP')" src="../../../../assets/img/private_set.png" alt="" />
         </p>
         <div ref="scroll-content">
-          <carousel :carouselArr="carouselArrObj['EXP']" :carouselWidth="carouselWidth" :carouselSize="6"> </carousel>
+          <arCarousel :carouselArr="carouselArrObj['EXP']" :carouselWidth="carouselWidth" :carouselSize="6"> </arCarousel>
         </div>
       </div>
     </div>
@@ -29,12 +29,12 @@
         <div style="display: flex">
           <el-button style="margin-right: 10px">委托收单</el-button>
           <el-input class="w-300" v-model="searchKeyWord">
-            <i slot="suffix" class="iconfont iconsousuo"></i>
+            <i slot="suffix" class="iconfont iconsousuo" @click="getTableData(currentTab)"></i>
           </el-input>
         </div>
       </arTab>
       <div class="table">
-        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="true" :isShowIndex="true"></arTable>
+        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="false" :isShowIndex="false"></arTable>
       </div>
       <div class="pagination">
         <el-pagination
@@ -49,17 +49,27 @@
         </el-pagination>
       </div>
     </div>
+    <el-dialog :close-on-click-modal="false" title="测试" :visible.sync="showDialog" size="large">
+      <arTransfer v-if="showDialog" :TransferDataList="TransferDataList" :isShowMove="false" :isShowFixed="false"></arTransfer>
+      <span slot="footer">
+        <el-button @click="showDialog = false">取 消</el-button>
+        <el-button type="primary" @click="confirmDialog">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
-import carousel from '../../../../components/carousel'
+import arCarousel from '../../../../components/arCarousel'
 import arTable from '../../../../components/arTable/arTable.vue'
 import arTab from '../../../../components/arTab.vue'
+import arTransfer from '../../../../components/arTransfer.vue'
 import { capitalApplication } from './capitalApplictionAPI'
 export default {
   data() {
     return {
+      showDialog: false,
       carouselArrObj: {},
+      TransferDataList: [],
       carouselWidth: 0,
       tabList: [],
       currentTab: {},
@@ -311,6 +321,8 @@ export default {
     },
     tabClick(item) {
       this.currentTab = item
+      this.currentPage = 1
+      this.searchKeyWord = ''
       this.getTableColumn(this.currentTab)
     },
     getTableColumn(item) {
@@ -318,8 +330,20 @@ export default {
         if (res.data.flag === 'SUCCESS') {
           let result = res.data.data.cols
           result.forEach((item, index) => {
+            item.align = 'left'
+            item.width = item.dataLen
             if (item.dataType === 'TEXT') {
               item.dataType = '01'
+            }
+            if (item.dataType === 'MONEY') {
+              item.dataType = '03'
+              item.align = 'right'
+            }
+            if (item.dataType === 'DATE') {
+              item.dataType = '08'
+            }
+            if (item.dataItem === 'billNo') {
+              item.isLink = true
             }
             item.arField = item.dataItem
             item.infoName = item.dataItemNa
@@ -367,12 +391,20 @@ export default {
     currentChange(val) {
       this.currentPage = val
       this.getTableData(this.currentTab)
+    },
+    settingLabel(type) {
+      this.TransferDataList = this.carouselArrObj[type]
+      this.showDialog = true
+    },
+    confirmDialog() {
+      console.log(this.TransferDataList)
     }
   },
   components: {
-    carousel,
+    arCarousel,
     arTable,
-    arTab
+    arTab,
+    arTransfer
   }
 }
 </script>

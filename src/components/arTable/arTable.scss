@@ -2,6 +2,7 @@
 $borderColor: #bbb;
 $blurColor: #0066ff;
 $focusColor: #0066ff;
+$linkTextColor: #0066ff;
 $fontSize: 14px;
 $RowHeight: 36px;
 $hoverBgColor: rgba(0, 102, 255, 0.1);
@@ -114,5 +115,15 @@ $editBorderColor: #0066ff;
   }
   .elx-table.border--full .elx-table--fixed-left-wrapper {
     border-right: 1px solid $borderColor;
+  }
+  .elx-cell div.oparation {
+    span {
+      margin-left: 8px;
+      margin-right: 8px;
+      color: $linkTextColor;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

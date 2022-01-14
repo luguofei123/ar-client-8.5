@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'carousel',
+  name: 'arCarousel',
   props: {
     carouselArr: {
       type: Array,

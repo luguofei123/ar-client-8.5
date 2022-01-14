@@ -15,11 +15,12 @@
       <template v-for="(item, index) in columnList">
         <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit"></tableColumn>
       </template>
-      <ux-table-column fixed="right" header-align="center" align="center" title="操作" width="120">
+      <ux-table-column fixed="right" header-align="center" align="center" title="操作" min-width="70">
         <template>
-          <span type="text">查看</span>
-          <span type="text">编辑</span>
-          <span type="text">删除</span>
+          <div class="oparation">
+            <span type="text">查看</span>
+            <span type="text">编辑</span>
+          </div>
         </template>
       </ux-table-column>
     </ux-grid>

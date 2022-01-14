@@ -1,9 +1,10 @@
 <template>
   <ux-table-column
     :field="item.arField"
-    align="center"
-    title="item.infoName"
-    :min-width="item.rowNum ? item.rowNum : '150px'"
+    :header-align="item.align ? item.align : 'center'"
+    :align="item.align ? item.align : 'center'"
+    :title="item.infoName"
+    :min-width="item.width ? item.width : '150'"
     :resizable="true"
     :edit-render="isEdit"
   >
@@ -15,6 +16,7 @@
     </template>
     <template v-slot="{ row }">
       <span v-if="item.dataType === '01'">{{ row[item.arField] }}</span>
+      <span v-if="item.dataType === '03'">{{ row[item.arField] | moneyFormat }}</span>
       <span v-if="item.dataType === '08' || item.dataType === '10'">{{ row[item.arField] | timestampToTime(item) }}</span>
     </template>
   </ux-table-column>
