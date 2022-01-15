@@ -13,8 +13,14 @@
       </div>
     </div>
     <div class="myBill_tap">
-      <div class="tab"></div>
-      <div class="search"></div>
+      <arTab :tabList="tabList" @tabClick="tabClick" cssType="line">
+        <div style="display: flex; height: 34px">
+          <el-button>委托收单</el-button>
+          <el-button>委托收单</el-button>
+          <el-button>委托收单</el-button>
+          <el-button>委托收单</el-button>
+        </div>
+      </arTab>
       <div class="table">
         <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="false" :isShowIndex="false"></arTable>
       </div>
@@ -296,11 +302,11 @@ export default {
       })
     },
     initTabs() {
-      myBill.getArBusinssTabs().then(res => {
-        if (res.data.flag === 'SUCCESS') {
-          this.tabList = res.data.data
-          this.currentTab = this.tabList[0]
-          this.getTableColumn(this.currentTab)
+      myBill.getTabAndCol().then(res => {
+        if (res.data.flag === 'SUCCESS' && res.data.data.hasTab) {
+          this.tabList = res.data.data.tabs
+          // this.currentTab = this.tabList[0]
+          // this.getTableColumn(this.currentTab)
         }
       })
     },

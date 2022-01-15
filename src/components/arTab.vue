@@ -1,8 +1,8 @@
 <template>
-  <div class="tabBox">
+  <div :class="['tabBox', cssType === 'line' ? 'lineStlye' : 'buttonStlye']">
     <div class="tab">
       <span v-for="(item, index) in tabList" :key="index" @click="tabClick(item, index)" :class="[currentIndex === index ? 'currentClass' : '']">{{
-        item.sourceName
+        item.sourceName || item.tabName
       }}</span>
     </div>
     <!-- 按钮组或搜索框 -->
@@ -24,6 +24,10 @@ export default {
       default() {
         return []
       }
+    },
+    cssType: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -37,31 +41,54 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.tabBox {
+.tabBox.buttonStlye {
   display: flex;
   justify-content: space-between;
-}
-.tab {
-  display: inline-block;
-  background: #f3f3f3;
-  border-radius: 20px;
-  font-size: 14px;
-  font-family: 'AlibabaPuHuiTi-Regular,AlibabaPuHuiTi;';
-  color: #333333;
-  span {
+  .tab {
     display: inline-block;
-    padding: 6px 20px;
-    &:hover {
-      cursor: pointer;
+    background: #f3f3f3;
+    border-radius: 20px;
+    font-size: 14px;
+    font-family: 'AlibabaPuHuiTi-Regular,AlibabaPuHuiTi;';
+    color: #333333;
+    span {
+      display: inline-block;
+      padding: 6px 20px;
+      &:hover {
+        cursor: pointer;
+        background: #0066ff;
+        border-radius: 20px;
+        color: white;
+      }
+    }
+    span.currentClass {
       background: #0066ff;
       border-radius: 20px;
       color: white;
     }
   }
-  span.currentClass {
-    background: #0066ff;
-    border-radius: 20px;
-    color: white;
+}
+.tabBox.lineStlye {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dedede;
+  align-items: baseline;
+  .tab {
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'AlibabaPuHuiTi-Regular,AlibabaPuHuiTi;';
+    color: #333333;
+    span {
+      display: inline-block;
+      padding: 15px 20px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    span.currentClass {
+      color: #0066ff;
+      border-bottom: 2px solid #0066ff;
+    }
   }
 }
 </style>

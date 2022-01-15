@@ -8,8 +8,8 @@ export const myBill = {
     return myAxios.get('/typeset/artype/queryTypeByPtype',{params:parma})
   },
   // 获取tab页签
-  getArBusinssTabs(){
-    return myAxios.get('/sysset/arsysdatasource/getSourceInfoByTabName/AR_BUSINESS_TABS')
+  getTabAndCol(){
+    return myAxios.get('/sysset/arsystabcol/getTabAndCol/AR_BILL')
   },
   // 获取表格列
   getTableColumn(obj){
