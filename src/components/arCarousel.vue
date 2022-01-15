@@ -9,7 +9,7 @@
     </span>
     <div ref="scroll-box-wrap" class="scroll-box-wrap" :style="{ width: carouselWidth * (carouselArrNew.length + 1) + 'px' }">
       <div v-for="(arr, index) in carouselArrNew" :key="index">
-        <ul :style="{ width: carouselWidth + 'px' }">
+        <ul :style="{ width: carouselWidth + 'px' }" :class="[carouselSize === 16 ? 'size-16' : 'size-6']">
           <li v-for="item in arr" :key="item.id" :title="item.billName">{{ item.billName }}</li>
         </ul>
       </div>
@@ -161,7 +161,42 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    ul {
+    ul.size-16 {
+      margin: 10px 0;
+      display: flex;
+      float: left;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      height: 80px;
+      padding: 0 50px;
+      & > li:nth-of-type(8n + 1) {
+        margin-left: 0;
+      }
+      li {
+        padding-left: 14px;
+        width: 9.5%;
+        position: relative;
+        margin: 8px 0;
+        margin-left: 3%;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0px;
+          top: 6px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #0066ff;
+          border: 2px solid #e5efff;
+        }
+      }
+    }
+    ul.size-6 {
       margin: 10px 0;
       display: flex;
       float: left;
