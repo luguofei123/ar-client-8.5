@@ -112,4 +112,19 @@ $backgroundColor: #06f;
   .el-input__inner:focus {
     border-color: $activeBorderColor;
   }
+  .el-date-editor .el-range__icon {
+    position: absolute;
+    right: 5px;
+    color: #666;
+  }
+  .el-select .el-input .el-select__caret {
+    font-size: 20px;
+    color: #666;
+  }
+  .el-select .el-input .is-reverse {
+    transform: translateY(-30%);
+  }
+  .el-icon-arrow-up:before {
+    content: '\e78f';
+  }
 }

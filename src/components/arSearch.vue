@@ -4,7 +4,30 @@
       <template v-for="(item, index) in allSerchData">
         <div class="searchItem" :key="index">
           <span>{{ item.infoName }}</span>
-          <el-input v-model="value"></el-input>
+          <div style="width: 264px">
+            <template v-if="item.dataType === '01'">
+              <el-input v-model="searchData[item.arField]"></el-input>
+            </template>
+            <template v-else-if="item.dataType === '08'">
+              <el-date-picker
+                v-model="searchData[item.arField]"
+                type="daterange"
+                :picker-options="pickerOptions"
+                placeholder="选择日期范围"
+                format="yyyy-MM-dd"
+                align="right"
+                style="width: 100%"
+                unlink-panels
+                :default-time="['00:00:00', '23:59:59']"
+              >
+              </el-date-picker>
+            </template>
+            <template v-else-if="item.dataType === '12'">
+              <el-select clearable v-model="searchData[item.arField]" filterable placeholder="请选择结算方式" style="width: 100%">
+                <el-option v-for="(item, index) in settlementTypeList" :key="index" :label="item.sourceName" :value="item.sourceCode"></el-option>
+              </el-select>
+            </template>
+          </div>
         </div>
       </template>
     </div>
@@ -18,6 +41,39 @@ export default {
   name: 'arSearch',
   data() {
     return {
+      searchData: {},
+      settlementTypeList: [],
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+              picker.$emit('pick', [start, end])
+            }
+          }
+        ]
+      },
       allSerchData: [
         {
           infoName: '预算单位',
