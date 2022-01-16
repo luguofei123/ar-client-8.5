@@ -21,8 +21,14 @@
           <el-button>委托收单</el-button>
         </div>
       </arTab>
+      <arSearch>
+        <div style="display: flex; height: 34px; align-self: center">
+          <el-button type="primary">查询</el-button>
+          <el-button icon="el-icon-setting"></el-button>
+        </div>
+      </arSearch>
       <div class="table">
-        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="false" :isShowIndex="false"></arTable>
+        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="true" :isShowIndex="true"></arTable>
       </div>
       <div class="pagination">
         <el-pagination
@@ -50,6 +56,7 @@
 import arCarousel from '../../../../components/arCarousel'
 import arTable from '../../../../components/arTable/arTable.vue'
 import arTab from '../../../../components/arTab.vue'
+import arSearch from '../../../../components/arSearch.vue'
 import arTransfer from '../../../../components/arTransfer.vue'
 import { myBill } from './myBillAPI'
 export default {
@@ -395,6 +402,7 @@ export default {
     arCarousel,
     arTable,
     arTab,
+    arSearch,
     arTransfer
   }
 }

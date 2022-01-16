@@ -1,5 +1,7 @@
 // 重写elementui样式
-$borderColor: #06f;
+$borderColor: #bbb;
+$activeBorderColor: #06f;
+$backgroundColor: #06f;
 // 按钮重写
 .el-button {
   display: inline-block;
@@ -7,7 +9,7 @@ $borderColor: #06f;
   white-space: nowrap;
   cursor: pointer;
   background: #fff;
-  border: 1px solid #dcdcdc;
+  border: 1px solid $borderColor;
   border-color: #c4c4c4;
   color: rgb(31, 44, 61);
   -webkit-appearance: none;
@@ -28,27 +30,31 @@ $borderColor: #06f;
 .el-button:hover,
 .el-button:focus {
   color: #06f;
-  border-color: $borderColor;
+  border-color: $activeBorderColor;
 }
 .el-button:active {
   color: #06f;
-  border-color: $borderColor;
+  border-color: $activeBorderColor;
   outline: none;
+}
+.el-button.el-button--primary {
+  background-color: $backgroundColor;
+  color: white;
 }
 // 搜索输入框
 .el-input__inner::placeholder {
   color: #bebebe;
 }
 .el-input__inner:hover {
-  border-color: #dcdcdc;
+  border-color: $borderColor;
 }
 .el-input__inner:focus {
   outline: none;
-  border-color: $borderColor;
+  border-color: $activeBorderColor;
 }
 .el-input {
   position: relative;
-  font-size: 12px;
+  font-size: 14px;
   display: inline-block;
   width: 100%;
 }
@@ -59,7 +65,7 @@ $borderColor: #06f;
   background-color: #fff;
   background-image: none;
   border-radius: 3px;
-  border: 1px solid #dcdcdc;
+  border: 1px solid $borderColor;
   box-sizing: border-box;
   color: rgb(31, 44, 61);
   display: inline-block;
@@ -95,5 +101,15 @@ $borderColor: #06f;
   }
   .el-dialog__body {
     padding: 10px 15px;
+  }
+}
+// 表单中的样式
+.arForm {
+  .el-input__inner {
+    border: none;
+    border-bottom: 1px solid $borderColor;
+  }
+  .el-input__inner:focus {
+    border-color: $activeBorderColor;
   }
 }
