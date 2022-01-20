@@ -27,6 +27,9 @@
                 <el-option v-for="(item, index) in settlementTypeList" :key="index" :label="item.sourceName" :value="item.sourceCode"></el-option>
               </el-select>
             </template>
+            <template v-else-if="item.dataType === '21'">
+              <arTreeSelect></arTreeSelect>
+            </template>
           </div>
         </div>
       </template>
@@ -37,8 +40,12 @@
 </template>
 
 <script>
+import arTreeSelect from './arTreeSelect.vue'
 export default {
   name: 'arSearch',
+  components: {
+    arTreeSelect
+  },
   data() {
     return {
       searchData: {},
@@ -75,6 +82,13 @@ export default {
         ]
       },
       allSerchData: [
+        {
+          infoName: '部门经济',
+          arField: 'department',
+          order: 0,
+          dataItem: 'department',
+          dataType: '21'
+        },
         {
           infoName: '预算单位',
           arField: 'coCode',

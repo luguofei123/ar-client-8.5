@@ -85,6 +85,9 @@ $backgroundColor: #06f;
     cursor: pointer;
   }
 }
+.el-input__icon {
+  line-height: 32px;
+}
 // 对话框样式重写
 .el-dialog {
   .el-dialog__header {
@@ -120,9 +123,6 @@ $backgroundColor: #06f;
   .el-select .el-input .el-select__caret {
     font-size: 20px;
     color: #666;
-  }
-  .el-select .el-input .is-reverse {
-    transform: translateY(-30%);
   }
   .el-icon-arrow-up:before {
     content: '\e78f';

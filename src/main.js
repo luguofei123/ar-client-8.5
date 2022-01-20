@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import jquery from 'jquery'
 import '@/commonUtils/filter/filter.js'
+// import '@/commonUtils/directives/directives.js'
 window.jquery = window.$ = jquery
 // 引入全局样式
 import '@/assets/css/reset.scss'
