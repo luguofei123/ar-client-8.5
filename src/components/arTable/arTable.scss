@@ -49,6 +49,17 @@ $editBorderColor: #0066ff;
         }
       }
     }
+    // 表格尾部
+    .elx-table--footer-wrapper {
+      border-top: 1px solid $borderColor;
+      table > tfoot > tr {
+        background-color: #fffad6;
+        td {
+          height: $RowHeight;
+          color: $colorBody;
+        }
+      }
+    }
   }
   // 固定部分
   .elx-table--fixed-wrapper {
