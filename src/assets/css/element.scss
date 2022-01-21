@@ -85,8 +85,18 @@ $backgroundColor: #06f;
     cursor: pointer;
   }
 }
+.el-icon-caret-bottom.is-reverse {
+  transform: rotateZ(-180deg);
+}
+// 其他icon 20px
 .el-input__icon {
   line-height: 32px;
+  color: #666;
+  font-size: 20px;
+}
+// 日期icon  12px
+.el-input__icon.el-icon-date {
+  font-size: 12px;
 }
 // 对话框样式重写
 .el-dialog {
@@ -101,12 +111,22 @@ $backgroundColor: #06f;
       top: 15px;
       right: 15px;
     }
+    .el-icon-close {
+      color: #666;
+    }
   }
   .el-dialog__body {
     padding: 10px 15px;
   }
 }
-// 表单中的样式
+// el-tree样式重写
+.el-tree {
+  .el-tree-node__expand-icon {
+    font-size: 16px;
+    color: #666;
+  }
+}
+// 自定义表单中的样式
 .arForm {
   .el-input__inner {
     border: none;

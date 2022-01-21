@@ -74,7 +74,8 @@ import {
   Loading,
   MessageBox,
   Notification,
-  Pagination
+  Pagination,
+  Scrollbar
 } from 'element-ui'
 Vue.use(Dialog)
 Vue.use(Autocomplete)
@@ -131,6 +132,7 @@ Vue.use(Cascader)
 Vue.use(ColorPicker)
 Vue.use(Transfer)
 Vue.use(Pagination)
+Vue.use(Scrollbar)
 Vue.use(Loading.directive)
 Vue.prototype.$loadingService = Loading.service
 Vue.prototype.$msgbox = MessageBox

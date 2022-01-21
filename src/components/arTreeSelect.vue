@@ -1,15 +1,13 @@
 <template>
-  <div v-clickoutside="handleClose">
-    <el-input clearable v-model="selectValue" ref="reference" @click.native="toggleDropDown"></el-input>
+  <div v-clickoutside="handleDropDownClose">
+    <el-input clearable v-model="selectValue" ref="reference" @click.native="toggleDropDown" suffix-icon="el-icon-caret-bottom"></el-input>
 
     <transition name="el-zoom-in-top">
       <select-drop-down ref="popper" v-show="visible" class="select-drop-down">
         <el-input v-model="searchValue" suffix-icon="el-icon-date"></el-input>
-        <div style="height: 200px; over-flow: auto">
-          <!-- <el-scrollbar tag="div" wrap-class="el-select-dropdown__wrap" view-class="el-select-dropdown__list" class="is-empty"> -->
+        <el-scrollbar tag="div" wrap-class="el-select-dropdown__wrap" view-class="el-select-dropdown__list" class="is-empty">
           <el-tree ref="tree" default-expand-all highlight-current :data="treeData" :node-key="defaultProps.id" :props="defaultProps"> </el-tree>
-          <!-- </el-scrollbar> -->
-        </div>
+        </el-scrollbar>
       </select-drop-down>
     </transition>
   </div>
@@ -106,6 +104,16 @@ export default {
   mounted() {
     addResizeListener(this.$el, this.handleResize)
   },
+  watch: {
+    visible(flag) {
+      let icon = this.$el.querySelector('.el-input__icon')
+      if (flag) {
+        addClass(icon, 'is-reverse')
+      } else {
+        removeClass(icon, 'is-reverse')
+      }
+    }
+  },
   beforeDestroy() {
     if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize)
   },
@@ -119,7 +127,7 @@ export default {
         this.searchValue = ''
       }
     },
-    handleClose() {
+    handleDropDownClose() {
       this.searchValue = ''
       this.visible = false
     }
@@ -139,7 +147,7 @@ export default {
   opacity: 0;
   transform: scaleY(0);
 }
-.select-drop-down {
+/* .select-drop-down {
   padding: 5px;
-}
+} */
 </style>
