@@ -28,7 +28,15 @@
         </div>
       </arSearch>
       <div class="table">
-        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="true" :isShowIndex="true"></arTable>
+        <arTable
+          :tableData="tableData"
+          :columnList="tableColumn"
+          @tdChange="tdChange"
+          :isShowSum="true"
+          :isEdit="false"
+          :isShowCheckbox="true"
+          :isShowIndex="true"
+        ></arTable>
       </div>
       <div class="pagination">
         <el-pagination

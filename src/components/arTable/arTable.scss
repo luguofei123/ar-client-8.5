@@ -70,6 +70,8 @@ $editBorderColor: #0066ff;
           background-color: $bgColorHeader;
           th {
             height: $RowHeight;
+            color: $colorHeader;
+            font-weight: normal;
           }
         }
       }
@@ -86,6 +88,16 @@ $editBorderColor: #0066ff;
           }
         }
       }
+      .elx-table--footer-wrapper.fixed-right--wrapper {
+        border-top: 1px solid $borderColor;
+        table > tfoot > tr {
+          background-color: #fffad6;
+          td {
+            height: $RowHeight;
+            color: $colorBody;
+          }
+        }
+      }
     }
     // 左侧固定部分
     .elx-table--fixed-left-wrapper {
@@ -94,6 +106,8 @@ $editBorderColor: #0066ff;
           background-color: $bgColorHeader;
           th {
             height: $RowHeight;
+            color: $colorHeader;
+            font-weight: normal;
           }
         }
       }
@@ -107,6 +121,16 @@ $editBorderColor: #0066ff;
           }
           td {
             height: $RowHeight;
+          }
+        }
+      }
+      .elx-table--footer-wrapper.fixed-left--wrapper {
+        border-top: 1px solid $borderColor;
+        table > tfoot > tr {
+          background-color: #fffad6;
+          td {
+            height: $RowHeight;
+            color: $colorBody;
           }
         }
       }

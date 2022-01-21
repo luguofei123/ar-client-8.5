@@ -35,11 +35,9 @@ import { toThousandFix } from '../../commonUtils/utils/util'
 export default {
   name: 'editTable',
   data() {
-    return {
-      isShowSum: true
-    }
+    return {}
   },
-  props: ['isShowCheckbox', 'isShowIndex', 'columnList', 'tableData', 'isEdit'],
+  props: ['isShowCheckbox', 'isShowIndex', 'columnList', 'tableData', 'isEdit', 'isShowSum'],
   methods: {
     tdChange(obj) {
       this.$emit('tdChange', obj)

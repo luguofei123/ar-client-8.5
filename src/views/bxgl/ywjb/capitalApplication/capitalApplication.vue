@@ -34,7 +34,15 @@
         </div>
       </arTab>
       <div class="table">
-        <arTable :tableData="tableData" :columnList="tableColumn" @tdChange="tdChange" :isEdit="false" :isShowCheckbox="false" :isShowIndex="false"></arTable>
+        <arTable
+          :tableData="tableData"
+          :columnList="tableColumn"
+          @tdChange="tdChange"
+          :isShowSum="true"
+          :isEdit="false"
+          :isShowCheckbox="false"
+          :isShowIndex="false"
+        ></arTable>
       </div>
       <div class="pagination">
         <el-pagination
