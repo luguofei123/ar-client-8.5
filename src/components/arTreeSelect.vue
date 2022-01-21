@@ -1,3 +1,4 @@
+<!-- 树形组件封装，所有的树都是用这个组件 -->
 <template>
   <div v-clickoutside="handleDropDownClose">
     <el-input clearable v-model="selectValue" ref="reference" @click.native="toggleDropDown" suffix-icon="el-icon-caret-bottom"></el-input>

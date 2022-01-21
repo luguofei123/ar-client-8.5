@@ -1,3 +1,6 @@
+<!-- 按钮组或搜索框
+改组件专门为搜索区域使用，本来想和表单组件合成一个，但是两者字段差异性较大，故分开做了
+ -->
 <template>
   <div class="serachBox arForm">
     <div class="searchCondition">

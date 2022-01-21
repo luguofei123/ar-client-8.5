@@ -15,6 +15,7 @@ $bgColorBodyExpandRow: #f9f9f9;
 // $colorBody: rgba(0, 0, 0, 0.85);
 $colorBody: #333;
 $editBorderColor: #0066ff;
+$footerBgColor: #fffad6;
 // 表格尾部
 .plTableBox {
   // 主体部分
@@ -53,7 +54,7 @@ $editBorderColor: #0066ff;
     .elx-table--footer-wrapper {
       border-top: 1px solid $borderColor;
       table > tfoot > tr {
-        background-color: #fffad6;
+        background-color: $footerBgColor;
         td {
           height: $RowHeight;
           color: $colorBody;
@@ -91,7 +92,7 @@ $editBorderColor: #0066ff;
       .elx-table--footer-wrapper.fixed-right--wrapper {
         border-top: 1px solid $borderColor;
         table > tfoot > tr {
-          background-color: #fffad6;
+          background-color: $footerBgColor;
           td {
             height: $RowHeight;
             color: $colorBody;
@@ -127,7 +128,7 @@ $editBorderColor: #0066ff;
       .elx-table--footer-wrapper.fixed-left--wrapper {
         border-top: 1px solid $borderColor;
         table > tfoot > tr {
-          background-color: #fffad6;
+          background-color: $footerBgColor;
           td {
             height: $RowHeight;
             color: $colorBody;
