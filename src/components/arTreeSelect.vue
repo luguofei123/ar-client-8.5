@@ -1,13 +1,23 @@
 <!-- 树形组件封装，所有的树都是用这个组件 -->
 <template>
   <div v-clickoutside="handleDropDownClose">
-    <el-input clearable v-model="selectValue" ref="reference" @click.native="toggleDropDown" suffix-icon="el-icon-caret-bottom"></el-input>
+    <el-input clearable v-model="selectLabel" ref="reference" @click.native="toggleDropDown" suffix-icon="el-icon-caret-bottom"></el-input>
 
     <transition name="el-zoom-in-top">
       <select-drop-down ref="popper" v-show="visible" class="select-drop-down">
-        <el-input v-model="searchValue" suffix-icon="el-icon-date"></el-input>
+        <el-input v-model="searchValue" suffix-icon="el-icon-search"></el-input>
         <el-scrollbar tag="div" wrap-class="el-select-dropdown__wrap" view-class="el-select-dropdown__list" class="is-empty">
-          <el-tree ref="tree" default-expand-all highlight-current :data="treeData" :node-key="defaultProps.id" :props="defaultProps"> </el-tree>
+          <el-tree
+            ref="tree"
+            :filter-node-method="filterNode"
+            default-expand-all
+            highlight-current
+            :data="treeData"
+            @node-click="handleNodeClick"
+            :node-key="defaultProps.id"
+            :props="defaultProps"
+          >
+          </el-tree>
         </el-scrollbar>
       </select-drop-down>
     </transition>
@@ -25,7 +35,18 @@ import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/re
 export default {
   name: 'selectDropdown',
   // mixins: [Emitter, Locale],
-  props: [],
+  props: {
+    defaultProps: {
+      type: Object,
+      default() {
+        return {
+          children: 'children',
+          label: 'label',
+          id: 'id'
+        }
+      }
+    }
+  },
   components: {
     selectDropDown
   },
@@ -36,70 +57,58 @@ export default {
     return {
       visible: false,
       inputWidth: 0,
-      selectValue: '',
+      selectLabel: '',
       searchValue: '',
       treeData: [
         {
+          id: 1,
           label: '一级 1',
           children: [
             {
+              id: 4,
               label: '二级 1-1',
               children: [
                 {
+                  id: 9,
                   label: '三级 1-1-1'
+                },
+                {
+                  id: 10,
+                  label: '三级 1-1-2'
                 }
               ]
             }
           ]
         },
         {
+          id: 2,
           label: '一级 2',
           children: [
             {
-              label: '二级 2-1',
-              children: [
-                {
-                  label: '三级 2-1-1'
-                }
-              ]
+              id: 5,
+              label: '二级 2-1'
             },
             {
-              label: '二级 2-2',
-              children: [
-                {
-                  label: '三级 2-2-1'
-                }
-              ]
+              id: 6,
+              label: '二级 2-2'
             }
           ]
         },
         {
+          id: 3,
           label: '一级 3',
           children: [
             {
-              label: '二级 3-1',
-              children: [
-                {
-                  label: '三级 3-1-1'
-                }
-              ]
+              id: 7,
+              label: '二级 3-1'
             },
             {
-              label: '二级 3-2',
-              children: [
-                {
-                  label: '三级 3-2-1'
-                }
-              ]
+              id: 8,
+              label: '二级 3-2'
             }
           ]
         }
-      ],
-      defaultProps: {
-        children: 'children',
-        label: 'label',
-        id: 'id'
-      }
+      ]
     }
   },
   mounted() {
@@ -110,26 +119,37 @@ export default {
       let icon = this.$el.querySelector('.el-input__icon')
       if (flag) {
         addClass(icon, 'is-reverse')
+        this.searchValue = ''
       } else {
         removeClass(icon, 'is-reverse')
       }
+    },
+    searchValue(val) {
+      this.$refs.tree.filter(val)
     }
   },
   beforeDestroy() {
     if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize)
   },
   methods: {
+    handleNodeClick(data) {
+      console.log(data)
+      this.visible = false
+      this.selectLabel = data[this.defaultProps.label]
+      this.$emit('change', data)
+    },
+    // 树模糊搜索
+    filterNode(value, data) {
+      if (!value) return true
+      return data[this.defaultProps.label].indexOf(value) !== -1
+    },
     handleResize() {
       this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width
     },
     toggleDropDown() {
       this.visible = !this.visible
-      if (!this.visible) {
-        this.searchValue = ''
-      }
     },
     handleDropDownClose() {
-      this.searchValue = ''
       this.visible = false
     }
   }

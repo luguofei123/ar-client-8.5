@@ -4,7 +4,7 @@
 <template>
   <div class="serachBox arForm">
     <div class="searchCondition">
-      <template v-for="(item, index) in allSerchData">
+      <template v-for="(item, index) in searchFieldList">
         <div class="searchItem" :key="index">
           <span>{{ item.infoName }}</span>
           <div style="width: 264px">
@@ -31,7 +31,13 @@
               </el-select>
             </template>
             <template v-else-if="item.dataType === '21'">
-              <arTreeSelect></arTreeSelect>
+              <arTreeSelect
+                @change="
+                  data => {
+                    formChange(data, item)
+                  }
+                "
+              ></arTreeSelect>
             </template>
           </div>
         </div>
@@ -83,62 +89,11 @@ export default {
             }
           }
         ]
-      },
-      allSerchData: [
-        {
-          infoName: '部门经济',
-          arField: 'department',
-          order: 0,
-          dataItem: 'department',
-          dataType: '21'
-        },
-        {
-          infoName: '预算单位',
-          arField: 'coCode',
-          order: 0,
-          dataItem: 'coCode',
-          dataType: '12'
-        },
-        {
-          infoName: '单据日期',
-          arField: 'startDate',
-          order: 0,
-          dataItem: 'startDate',
-          dataType: '08'
-        },
-        {
-          infoName: '单据类型',
-          arField: 'billType',
-          order: 0,
-          dataItem: 'billType',
-          dataType: '12'
-        },
-        {
-          infoName: '模糊搜索',
-          arField: 'searchKeyWord',
-          order: 0,
-          dataItem: 'searchKeyWord',
-          dataType: '01'
-        },
-        {
-          infoName: '支付状态',
-          arField: 'payState',
-          order: 0,
-          dataItem: 'payState',
-          dataType: '12'
-        },
-        {
-          infoName: '打印状态',
-          arField: 'isPrint',
-          order: 0,
-          dataItem: 'isPrint',
-          dataType: '12'
-        }
-      ]
+      }
     }
   },
   props: {
-    tabList: {
+    searchFieldList: {
       type: Array,
       default() {
         return []
@@ -146,9 +101,9 @@ export default {
     }
   },
   methods: {
-    tabClick(item, index) {
-      this.currentIndex = index
-      this.$emit('tabClick', item)
+    formChange(data, item) {
+      this.$emit('formChange', data)
+      this.searchData[item.arField] = data.label
     }
   },
   mounted() {},

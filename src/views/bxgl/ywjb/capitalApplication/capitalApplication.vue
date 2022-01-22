@@ -58,7 +58,7 @@
       </div>
     </div>
     <el-dialog :close-on-click-modal="false" title="测试" :visible.sync="showDialog" size="large">
-      <arTransfer v-if="showDialog" :TransferDataList="TransferDataList" :isShowMove="false" :isShowFixed="false"></arTransfer>
+      <arTransfer ref="arTransfer" v-if="showDialog" :TransferDataList="TransferDataList" :isShowMove="false" :isShowFixed="false"></arTransfer>
       <span slot="footer">
         <el-button @click="showDialog = false">取 消</el-button>
         <el-button type="primary" @click="confirmDialog">确 定</el-button>
@@ -406,6 +406,7 @@ export default {
     },
     confirmDialog() {
       console.log(this.TransferDataList)
+      console.log(this.$refs.arTransfer)
     }
   },
   components: {

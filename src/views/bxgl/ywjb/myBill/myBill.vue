@@ -21,9 +21,9 @@
           <el-button>委托收单</el-button>
         </div>
       </arTab>
-      <arSearch>
+      <arSearch ref="arSearch" :searchFieldList="allSerchData" @formChange="formChange">
         <div style="display: flex; height: 34px; align-self: center">
-          <el-button type="primary">查询</el-button>
+          <el-button type="primary" @click="getTableData(currentTab)">查询</el-button>
           <el-button icon="el-icon-setting"></el-button>
         </div>
       </arSearch>
@@ -293,6 +293,57 @@ export default {
           infoName: '支付令',
           isNotEmpty: 'N'
         }
+      ],
+      allSerchData: [
+        {
+          infoName: '部门经济',
+          arField: 'department',
+          order: 0,
+          dataItem: 'department',
+          dataType: '21'
+        },
+        {
+          infoName: '预算单位',
+          arField: 'coCode',
+          order: 0,
+          dataItem: 'coCode',
+          dataType: '12'
+        },
+        {
+          infoName: '单据日期',
+          arField: 'startDate',
+          order: 0,
+          dataItem: 'startDate',
+          dataType: '08'
+        },
+        {
+          infoName: '单据类型',
+          arField: 'billType',
+          order: 0,
+          dataItem: 'billType',
+          dataType: '12'
+        },
+        {
+          infoName: '模糊搜索',
+          arField: 'searchKeyWord',
+          order: 0,
+          dataItem: 'searchKeyWord',
+          dataType: '01'
+        },
+        {
+          infoName: '支付状态',
+          arField: 'payState',
+          order: 0,
+          dataItem: 'payState',
+          dataType: '12'
+        },
+        {
+          infoName: '打印状态',
+          arField: 'isPrint',
+          order: 0,
+          dataItem: 'isPrint',
+          dataType: '12'
+        }
       ]
     }
   },
@@ -305,6 +356,9 @@ export default {
     tdChange(obj) {
       this.$set(this.tableData[obj.rowIndex], obj.field, obj.value)
       console.log(obj)
+    },
+    formChange(data) {
+      console.log(data)
     },
     initCarousle() {
       let param = {
@@ -360,6 +414,7 @@ export default {
       })
     },
     getTableData(item) {
+      console.log(this.$refs.arSearch)
       let param = {
         endDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
         limit: this.pageSize,
@@ -373,20 +428,10 @@ export default {
       myBill.getTableData(param).then(res => {
         if (res.data.flag === 'SUCCESS') {
           let result = res.data.data.content
-          if (item.sourceCode === 'HOME_BG') {
-            this.tableData = this.doPageByFront(result, this.pageSize, this.currentPage)
-            this.total = result.length
-          } else {
-            this.tableData = result
-            this.total = res.data.data.totalElements
-          }
+          this.tableData = result
+          this.total = res.data.data.totalElements
         }
       })
-    },
-    // 前端分页
-    doPageByFront(data, pageSize, currentPage) {
-      console.log(data, pageSize, currentPage)
-      return data.slice((currentPage - 1) * pageSize, currentPage * pageSize)
     },
     // 分页条数改变
     sizeChange(val) {

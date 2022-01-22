@@ -98,6 +98,16 @@ $backgroundColor: #06f;
 .el-input__icon.el-icon-date {
   font-size: 12px;
 }
+.el-input__icon.el-icon-search {
+  font-size: 14px;
+}
+.el-icon-circle-close {
+  color: #666;
+}
+.el-input__clear.el-input__icon.el-icon-circle-close {
+  position: absolute;
+  left: -18px;
+}
 // 对话框样式重写
 .el-dialog {
   .el-dialog__header {
@@ -125,6 +135,9 @@ $backgroundColor: #06f;
     font-size: 16px;
     color: #666;
   }
+  .el-tree-node__expand-icon.is-leaf {
+    color: transparent;
+  }
 }
 // 自定义表单中的样式
 .arForm {
@@ -138,6 +151,7 @@ $backgroundColor: #06f;
   .el-date-editor .el-range__icon {
     position: absolute;
     right: 5px;
+    top: 3px;
     color: #666;
   }
   .el-select .el-input .el-select__caret {
