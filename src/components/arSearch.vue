@@ -18,7 +18,8 @@
                 :picker-options="pickerOptions"
                 placeholder="选择日期范围"
                 format="yyyy-MM-dd"
-                align="right"
+                value-format="timestamp"
+                align="left"
                 style="width: 100%"
                 unlink-panels
                 :default-time="['00:00:00', '23:59:59']"

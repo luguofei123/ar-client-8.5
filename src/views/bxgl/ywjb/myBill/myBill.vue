@@ -374,8 +374,8 @@ export default {
       myBill.getTabAndCol().then(res => {
         if (res.data.flag === 'SUCCESS' && res.data.data.hasTab) {
           this.tabList = res.data.data.tabs
-          // this.currentTab = this.tabList[0]
-          // this.getTableColumn(this.currentTab)
+          this.currentTab = this.tabList[0]
+          this.getTableColumn(this.currentTab)
         }
       })
     },
@@ -386,44 +386,51 @@ export default {
       this.getTableColumn(this.currentTab)
     },
     getTableColumn(item) {
-      myBill.getTableColumn(item).then(res => {
-        if (res.data.flag === 'SUCCESS') {
-          let result = res.data.data.cols
-          result.forEach((item, index) => {
-            item.align = 'left'
-            item.width = item.dataLen
-            if (item.dataType === 'TEXT') {
-              item.dataType = '01'
-            }
-            if (item.dataType === 'MONEY') {
-              item.dataType = '03'
-              item.align = 'right'
-            }
-            if (item.dataType === 'DATE') {
-              item.dataType = '08'
-            }
-            if (item.dataItem === 'billNo') {
-              item.isLink = true
-            }
-            item.arField = item.dataItem
-            item.infoName = item.dataItemNa
-          })
-          this.tableColumn = result
-          this.getTableData(item)
+      item.cols.forEach((item, index) => {
+        item.align = 'left'
+        item.width = item.dataLen
+        if (item.dataType === 'TEXT') {
+          item.dataType = '01'
         }
+        if (item.dataType === 'MONEY') {
+          item.dataType = '03'
+          item.align = 'right'
+        }
+        if (item.dataType === 'DATE') {
+          item.dataType = '08'
+        }
+        if (item.dataItem === 'billNo') {
+          item.isLink = true
+        }
+        item.arField = item.dataItem
+        item.infoName = item.dataItemNa
       })
+      this.tableColumn = item.cols
+      this.getTableData(item)
     },
     getTableData(item) {
       console.log(this.$refs.arSearch)
       let param = {
-        endDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
-        limit: this.pageSize,
-        offset: this.currentPage,
-        reportType: item.sourceCode,
-        roleIdLs: this.$getCommonData.svRoleId,
-        searchKeyWord: this.searchKeyWord,
-        startDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
-        userId: this.$getCommonData.svUserCode
+        billType: '',
+        coCode: '006002001',
+        endDate: 1642867200000,
+        inputorId: 'AR01',
+        invoiceStatus: '',
+        isOrder: 'N',
+        isPrint: '',
+        limit: 10,
+        menuCode: '140101001002',
+        offset: 1,
+        orgName: '',
+        parentBillType: 'EXPENSE',
+        payState: '',
+        posi: '10',
+        queryCondi: {},
+        roleIdLs: '9588',
+        searchKeyWord: '',
+        startDate: 1640966400000,
+        tabCondition: item.condiStr,
+        workFlowStatus: item.workFlowStatus
       }
       myBill.getTableData(param).then(res => {
         if (res.data.flag === 'SUCCESS') {

@@ -13,10 +13,10 @@ export const myBill = {
   },
   // 获取表格列
   getTableColumn(obj){
-    return myAxios.get(`/sysset/arsystabcol/getTabAndCol/${obj.sourceCode}`)
+    return myAxios.get(`/sysset/arsystabcol/getTabSet?pageId=${obj.pageId}&tabId=${obj.id}&type=columns`)
   },
   // 获取table数据
   getTableData(param){
-    return myAxios.post('/bill/arBillReport/getArBillReport',param)
+    return myAxios.post('/bill/arBill/getArBillAll',param)
   }
 }
