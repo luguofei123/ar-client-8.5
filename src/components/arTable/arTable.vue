@@ -2,8 +2,10 @@
   <div>
     <ux-grid
       :data="tableData"
+      :height="tableHeight"
       border
       stripe
+      ref="table"
       keep-source
       :edit-config="{ trigger: 'click', mode: 'cell', showIcon: false }"
       show-overflow
@@ -17,10 +19,11 @@
       <template v-for="(item, index) in columnList">
         <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit"></tableColumn>
       </template>
-      <ux-table-column fixed="right" header-align="center" align="center" title="操作" min-width="70">
+      <ux-table-column fixed="right" header-align="center" align="center" title="操作" :width="operateWidth">
         <template>
-          <div class="oparation">
+          <div class="oparation" style="display: inline-block; white-space: nowrap">
             <span type="text">查看</span>
+            <span type="text">编辑</span>
             <span type="text">编辑</span>
           </div>
         </template>
@@ -35,12 +38,41 @@ import { toThousandFix } from '../../commonUtils/utils/util'
 export default {
   name: 'editTable',
   data() {
-    return {}
+    return {
+      operateWidth: 60, // 操作宽度自适应
+      tableHeight: 200
+    }
   },
   props: ['isShowCheckbox', 'isShowIndex', 'columnList', 'tableData', 'isEdit', 'isShowSum'],
   methods: {
     tdChange(obj) {
       this.$emit('tdChange', obj)
+    },
+    setTableHeight() {
+      console.log(this.$refs.table.$el.getBoundingClientRect())
+      console.log($(window).height())
+      let h = $(window).height() - this.$refs.table.$el.getBoundingClientRect().top - 65
+      // if(h>300){
+      //    this.tableHeight =
+      // }
+      this.tableHeight = h
+    },
+    // 表格操作列根据按钮，自适应显示宽度
+    SetOperateWidth() {
+      let arr = []
+      this.operateWidth = 60
+      setTimeout(() => {
+        let widthArr = $('.col--last').find('.oparation')
+        widthArr.each((index, item) => {
+          arr.push($(item)[0].offsetWidth)
+        })
+        if (Math.max(...arr) + 20 < 60) {
+          this.operateWidth = 60
+        } else {
+          this.operateWidth = Math.max(...arr) + 22
+        }
+        this.$refs.table.reloadData(this.tableData)
+      }, 100)
     },
     // 获取合计
     getSummaries(param) {
@@ -87,7 +119,17 @@ export default {
     }
   },
   mounted() {},
-  watch: {},
+  watch: {
+    tableData: {
+      handler(newV, oldV) {
+        this.$nextTick(() => {
+          this.SetOperateWidth()
+          this.setTableHeight()
+        })
+      },
+      deep: true
+    }
+  },
   components: {
     tableColumn
   }

@@ -11,9 +11,9 @@ export const myBill = {
   getTabAndCol(){
     return myAxios.get('/sysset/arsystabcol/getTabAndCol/AR_BILL')
   },
-  // 获取表格列
-  getTableColumn(obj){
-    return myAxios.get(`/sysset/arsystabcol/getTabSet?pageId=${obj.pageId}&tabId=${obj.id}&type=columns`)
+  // 获取表格列和搜索
+  getTableColumnOrSeachCloumn(obj,type){
+    return myAxios.get(`/sysset/arsystabcol/getTabSet?pageId=${obj.pageId}&tabId=${obj.id}&type=${type}`)
   },
   // 获取table数据
   getTableData(param){

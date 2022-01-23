@@ -24,7 +24,7 @@
       <arSearch ref="arSearch" :searchFieldList="allSerchData" @formChange="formChange">
         <div style="display: flex; height: 34px; align-self: center">
           <el-button type="primary" @click="getTableData(currentTab)">查询</el-button>
-          <el-button icon="el-icon-setting"></el-button>
+          <el-button icon="el-icon-setting" @click="settingLabel('APPLY')"></el-button>
         </div>
       </arSearch>
       <div class="table">
@@ -295,13 +295,13 @@ export default {
         }
       ],
       allSerchData: [
-        {
-          infoName: '部门经济',
-          arField: 'department',
-          order: 0,
-          dataItem: 'department',
-          dataType: '21'
-        },
+        // {
+        //   infoName: '部门经济',
+        //   arField: 'department',
+        //   order: 0,
+        //   dataItem: 'department',
+        //   dataType: '21'
+        // },
         {
           infoName: '预算单位',
           arField: 'coCode',
@@ -406,7 +406,19 @@ export default {
         item.infoName = item.dataItemNa
       })
       this.tableColumn = item.cols
-      this.getTableData(item)
+      this.getSearchData(item)
+    },
+    getSearchData(item) {
+      myBill.getTableColumnOrSeachCloumn(item, 'searchSet').then(res => {
+        if (res.data.flag === 'SUCCESS') {
+          let data = res.data.data
+          if (data && data.tabSet) {
+          } else {
+          }
+
+          this.getTableData(item)
+        }
+      })
     },
     getTableData(item) {
       console.log(this.$refs.arSearch)
@@ -511,9 +523,6 @@ export default {
     padding: 10px 10px;
     border-radius: 3px;
     box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 20%);
-    .table {
-      margin-top: 10px;
-    }
     .pagination {
       display: flex;
       justify-content: flex-end;
