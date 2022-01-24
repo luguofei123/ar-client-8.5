@@ -27,9 +27,31 @@
               >
               </el-date-picker>
             </template>
+            <!-- 单选 -->
             <template v-else-if="item.dataType === '12'">
-              <el-select clearable v-model="searchData[item.arField]" filterable placeholder="请选择结算方式" style="width: 100%">
-                <el-option v-for="(item, index) in settlementTypeList" :key="index" :label="item.sourceName" :value="item.sourceCode"></el-option>
+              <el-select
+                clearable
+                v-model="searchData[item.arField]"
+                filterable
+                placeholder="请选择结算方式"
+                @change="formChange(searchData[item.arField], item)"
+                style="width: 100%"
+              >
+                <el-option v-for="(it, index) in item.data" :key="index" :label="it.sourceName" :value="it.sourceCode"></el-option>
+              </el-select>
+            </template>
+            <!-- 多选 -->
+            <template v-else-if="item.dataType === '13'">
+              <el-select
+                clearable
+                multiple
+                v-model="searchData[item.arField]"
+                filterable
+                placeholder="请选择结算方式"
+                @change="formChange(searchData[item.arField], item)"
+                style="width: 100%"
+              >
+                <el-option v-for="(it, index) in item.data" :key="index" :label="it.sourceName" :value="it.sourceCode"></el-option>
               </el-select>
             </template>
             <template v-else-if="item.dataType === '21'">

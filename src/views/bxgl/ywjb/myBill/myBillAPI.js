@@ -18,5 +18,9 @@ export const myBill = {
   // 获取table数据
   getTableData(param){
     return myAxios.post('/bill/arBill/getArBillAll',param)
+  },
+  // 获取支付状态
+  getPayStatus(type){
+    return myAxios.get(`/sysset/arsysdatasource/getSourceInfoByTabName/${type}`)
   }
 }

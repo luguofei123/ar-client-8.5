@@ -344,29 +344,59 @@ export default {
           dataItem: 'isPrint',
           dataType: '12'
         }
-      ]
+      ],
+      searchParams: {},
+      pTypes: ['EXPENSE', 'REPAY', 'LOAN'],
+      payTypes: 'PAY_STATE_SEARCH'
     }
   },
   mounted() {
     this.carouselWidth = this.$refs['scroll-content'].offsetWidth
     this.initCarousle()
     this.initTabs()
+    // this.initSelectData()
   },
   methods: {
+    // 初始化下拉值
+    initSelectData() {
+      // 单据类型下拉塞值
+      this.allSerchData.forEach(item => {
+        if (item.arField === 'billType') {
+          item.data = this.carouselArr
+            .filter(item => {
+              return item.isUsed === 'Y'
+            })
+            .map(item => {
+              return {
+                sourceName: item.billName,
+                sourceCode: item.billType
+              }
+            })
+        } else if (item.arField === 'payState') {
+          myBill.getPayStatus(this.payTypes).then(res => {
+            if (res.data.flag === 'SUCCESS') {
+              item.data = res.data.data
+            }
+          })
+        }
+      })
+    },
     tdChange(obj) {
       this.$set(this.tableData[obj.rowIndex], obj.field, obj.value)
       console.log(obj)
     },
     formChange(data) {
       console.log(data)
+      this.searchParams = data
     },
     initCarousle() {
       let param = {
-        pTypes: 'EXPENSE,REPAY,LOAN'
+        pTypes: this.pTypes.join()
       }
       myBill.queryTypeByPtype(param).then(res => {
         if (res.data.flag === 'SUCCESS') {
           this.carouselArr = res.data.data
+          this.initSelectData()
         }
       })
     },
