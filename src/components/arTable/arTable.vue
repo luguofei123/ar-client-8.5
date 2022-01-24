@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="tableBox">
     <ux-grid
       :data="tableData"
-      :height="tableHeight"
+      :max-height="tableHeight"
       border
       stripe
       ref="table"
@@ -51,11 +51,18 @@ export default {
     setTableHeight() {
       console.log(this.$refs.table.$el.getBoundingClientRect())
       console.log($(window).height())
-      let h = $(window).height() - this.$refs.table.$el.getBoundingClientRect().top - 65
-      // if(h>300){
-      //    this.tableHeight =
-      // }
-      this.tableHeight = h
+      let h = $(window).height() - this.$refs.table.$el.getBoundingClientRect().top
+      if (h > 320) {
+        this.tableHeight = 310
+      } else {
+        this.tableHeight = h
+      }
+      // 再次计算表格高度，重新定位分页组件的位置
+      setTimeout(() => {
+        let h1 = $('.tableBox').height()
+        let hTable = $('.tableBox').find('.singleTable').height()
+        $('.tableBox').css('paddingBottom', hTable - h1)
+      })
     },
     // 表格操作列根据按钮，自适应显示宽度
     SetOperateWidth() {
@@ -77,7 +84,6 @@ export default {
     // 获取合计
     getSummaries(param) {
       let vm = this
-      debugger
       const { columns, data } = param
       const sums = []
       let itemData = {}
