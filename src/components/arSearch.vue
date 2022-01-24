@@ -21,6 +21,7 @@
                 value-format="timestamp"
                 align="left"
                 style="width: 100%"
+                @change="formChange(searchData[item.arField], item)"
                 unlink-panels
                 :default-time="['00:00:00', '23:59:59']"
               >
@@ -32,14 +33,14 @@
               </el-select>
             </template>
             <template v-else-if="item.dataType === '21'">
-              <arAgency
+              <arSelectAgency
                 v-model="searchData[item.arField]"
-                @change="
-                  data => {
-                    formChange(data, item)
+                @changeAgency="
+                  val => {
+                    formChange(val, item)
                   }
                 "
-              ></arAgency>
+              ></arSelectAgency>
             </template>
           </div>
         </div>
@@ -51,11 +52,11 @@
 </template>
 
 <script>
-import arAgency from './arSelectAgency.vue'
+import arSelectAgency from './arSelectAgency.vue'
 export default {
   name: 'arSearch',
   components: {
-    arAgency
+    arSelectAgency
   },
   data() {
     return {
@@ -103,9 +104,9 @@ export default {
     }
   },
   methods: {
-    formChange(data, item) {
-      this.$emit('formChange', data)
-      this.searchData[item.arField] = data.id
+    formChange(value, item) {
+      this.searchData[item.arField] = value
+      this.$emit('formChange', this.searchData)
     }
   },
   mounted() {},

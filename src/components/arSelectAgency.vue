@@ -1,6 +1,6 @@
 <template>
   <div>
-    <arTreeSelectAgency
+    <arTreeSelect
       v-model="cocode"
       :treeData="resourceTree"
       :defaultProps="defaultProps"
@@ -11,17 +11,17 @@
       placeholder="请选择单位"
       :isClearable="isClearable"
     >
-    </arTreeSelectAgency>
+    </arTreeSelect>
   </div>
 </template>
 
 <script>
-import arTreeSelectAgency from './arTreeSelect.vue'
+import arTreeSelect from './arTreeSelect.vue'
 import { commonAPI } from '../service/api/commonAPI'
 export default {
   name: 'arSelectAgency',
   components: {
-    arTreeSelectAgency
+    arTreeSelect
   },
   props: {
     disabled: {

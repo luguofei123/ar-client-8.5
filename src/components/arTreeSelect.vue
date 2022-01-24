@@ -132,14 +132,14 @@ export default {
       let obj = this.findFromTree(this.treeData, id, this.defaultProps.id, this.defaultProps.children)
       this.selectLabel = obj[this.defaultProps.label]
       this.selectId = obj[this.defaultProps.id]
-      this.$emit('change', obj)
+      this.$emit('change', this.selectId)
     },
     handleNodeClick(obj) {
       console.log(obj)
       this.visible = false
       this.selectLabel = obj[this.defaultProps.label]
       this.selectId = obj[this.defaultProps.id]
-      this.$emit('change', obj)
+      this.$emit('change', this.selectId)
     },
     // 树模糊搜索
     filterNode(value, data) {
