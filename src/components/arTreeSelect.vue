@@ -1,7 +1,15 @@
 <!-- 树形组件封装，所有的树都是用这个组件 -->
 <template>
   <div v-clickoutside="handleDropDownClose">
-    <el-input clearable v-model="selectLabel" ref="reference" @click.native="toggleDropDown" suffix-icon="el-icon-caret-bottom"></el-input>
+    <el-input
+      :clearable="clearable"
+      v-model="selectLabel"
+      :placeholder="placeholder"
+      ref="reference"
+      @click.native="toggleDropDown"
+      suffix-icon="el-icon-caret-bottom"
+      :disabled="disabled"
+    ></el-input>
 
     <transition name="el-zoom-in-top">
       <select-drop-down ref="popper" v-show="visible" class="select-drop-down">
@@ -31,10 +39,11 @@ import selectDropDown from 'element-ui/packages/select/src/select-dropdown.vue'
 import Clickoutside from 'element-ui/src/utils/clickoutside'
 import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom'
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event'
+import treeter from '../commonUtils/utils/treeter'
 
 export default {
-  name: 'selectDropdown',
-  // mixins: [Emitter, Locale],
+  name: 'arTreeSelect',
+  mixins: [treeter],
   props: {
     defaultProps: {
       type: Object,
@@ -45,7 +54,32 @@ export default {
           id: 'id'
         }
       }
-    }
+    },
+    treeData: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    placeholder: {
+      type: String,
+      default() {
+        return ''
+      }
+    },
+    clearable: {
+      type: Boolean,
+      default() {
+        return true
+      }
+    },
+    disabled: {
+      type: Boolean,
+      default() {
+        return false
+      }
+    },
+    value: {}
   },
   components: {
     selectDropDown
@@ -58,57 +92,8 @@ export default {
       visible: false,
       inputWidth: 0,
       selectLabel: '',
-      searchValue: '',
-      treeData: [
-        {
-          id: 1,
-          label: '一级 1',
-          children: [
-            {
-              id: 4,
-              label: '二级 1-1',
-              children: [
-                {
-                  id: 9,
-                  label: '三级 1-1-1'
-                },
-                {
-                  id: 10,
-                  label: '三级 1-1-2'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          id: 2,
-          label: '一级 2',
-          children: [
-            {
-              id: 5,
-              label: '二级 2-1'
-            },
-            {
-              id: 6,
-              label: '二级 2-2'
-            }
-          ]
-        },
-        {
-          id: 3,
-          label: '一级 3',
-          children: [
-            {
-              id: 7,
-              label: '二级 3-1'
-            },
-            {
-              id: 8,
-              label: '二级 3-2'
-            }
-          ]
-        }
-      ]
+      selectId: '',
+      searchValue: ''
     }
   },
   mounted() {
@@ -124,6 +109,16 @@ export default {
         removeClass(icon, 'is-reverse')
       }
     },
+    // v-model传的值过来的
+    value: {
+      handler(newVal, oldVal) {
+        if (typeof newVal === 'string' && newVal) {
+          this.selectTreeNode(newVal)
+        }
+      },
+      deep: true,
+      immediate: true
+    },
     searchValue(val) {
       this.$refs.tree.filter(val)
     }
@@ -132,11 +127,19 @@ export default {
     if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize)
   },
   methods: {
-    handleNodeClick(data) {
-      console.log(data)
+    // 设置选中的数据
+    selectTreeNode(id) {
+      let obj = this.findFromTree(this.treeData, id, this.defaultProps.id, this.defaultProps.children)
+      this.selectLabel = obj[this.defaultProps.label]
+      this.selectId = obj[this.defaultProps.id]
+      this.$emit('change', obj)
+    },
+    handleNodeClick(obj) {
+      console.log(obj)
       this.visible = false
-      this.selectLabel = data[this.defaultProps.label]
-      this.$emit('change', data)
+      this.selectLabel = obj[this.defaultProps.label]
+      this.selectId = obj[this.defaultProps.id]
+      this.$emit('change', obj)
     },
     // 树模糊搜索
     filterNode(value, data) {

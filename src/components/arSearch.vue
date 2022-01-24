@@ -11,7 +11,7 @@
             <template v-if="item.dataType === '01'">
               <el-input v-model="searchData[item.arField]"></el-input>
             </template>
-            <template v-else-if="item.dataType === '08'">
+            <template v-else-if="item.dataType === '09'">
               <el-date-picker
                 v-model="searchData[item.arField]"
                 type="daterange"
@@ -32,13 +32,14 @@
               </el-select>
             </template>
             <template v-else-if="item.dataType === '21'">
-              <arTreeSelect
+              <arAgency
+                v-model="searchData[item.arField]"
                 @change="
                   data => {
                     formChange(data, item)
                   }
                 "
-              ></arTreeSelect>
+              ></arAgency>
             </template>
           </div>
         </div>
@@ -50,11 +51,11 @@
 </template>
 
 <script>
-import arTreeSelect from './arTreeSelect.vue'
+import arAgency from './arSelectAgency.vue'
 export default {
   name: 'arSearch',
   components: {
-    arTreeSelect
+    arAgency
   },
   data() {
     return {
@@ -104,7 +105,7 @@ export default {
   methods: {
     formChange(data, item) {
       this.$emit('formChange', data)
-      this.searchData[item.arField] = data.label
+      this.searchData[item.arField] = data.id
     }
   },
   mounted() {},

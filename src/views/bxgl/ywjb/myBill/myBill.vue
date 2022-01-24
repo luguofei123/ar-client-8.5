@@ -307,14 +307,14 @@ export default {
           arField: 'coCode',
           order: 0,
           dataItem: 'coCode',
-          dataType: '12'
+          dataType: '21'
         },
         {
           infoName: '单据日期',
-          arField: 'startDate',
+          arField: 'daterange',
           order: 0,
-          dataItem: 'startDate',
-          dataType: '08'
+          dataItem: 'daterange',
+          dataType: '09'
         },
         {
           infoName: '单据类型',
@@ -421,8 +421,16 @@ export default {
       })
     },
     getTableData(item) {
-      console.log(this.$refs.arSearch)
-      let param = {
+      // 获取查询参数
+      let getSearchParams = this.$refs.arSearch.searchData
+      console.log(getSearchParams)
+      let params = {}
+      Object.keys(getSearchParams).forEach(key => {
+        if (getSearchParams[key]) {
+          params[key] = getSearchParams[key]
+        }
+      })
+      params = {
         billType: '',
         coCode: '006002001',
         endDate: 1642867200000,
@@ -444,7 +452,7 @@ export default {
         tabCondition: item.condiStr,
         workFlowStatus: item.workFlowStatus
       }
-      myBill.getTableData(param).then(res => {
+      myBill.getTableData(params).then(res => {
         if (res.data.flag === 'SUCCESS') {
           let result = res.data.data.content
           this.tableData = result
