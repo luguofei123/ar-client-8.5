@@ -7,4 +7,8 @@ export const commonAPI = {
   getAgencyList(){
     return myAxios.get('/sysset/arSysData/getAgencyList')
   },
+  // 跳转制单页时获取menuid时所需要的的参数
+  getHomeMenu(){
+    return myAxios.get('/sysset/arsysdatasource/getSourceInfoByTabName/HOME_MENU')
+  },
 }

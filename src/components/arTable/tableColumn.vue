@@ -7,6 +7,7 @@
     :min-width="item.width ? item.width : '150'"
     :resizable="true"
     :edit-render="isEdit"
+    :sortable="sortable"
   >
     <template v-slot:header>
       <i class="must" v-if="item.isNotEmpty === 'Y'">*</i><span>{{ item.infoName }}</span></template
@@ -25,7 +26,7 @@
 import tableCell from './tableCell.vue'
 export default {
   name: 'tableColumn',
-  props: ['item', 'isEdit'],
+  props: ['item', 'isEdit', 'sortable'],
   data() {
     return {}
   },

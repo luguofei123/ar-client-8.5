@@ -42,6 +42,9 @@
           :isEdit="false"
           :isShowCheckbox="false"
           :isShowIndex="false"
+          :sortable="true"
+          :tabType="currentTab.sourceCode"
+          :homeMenu="homeMenu"
         ></arTable>
       </div>
       <div class="pagination">
@@ -72,6 +75,7 @@ import arTable from '../../../../components/arTable/arTable.vue'
 import arTab from '../../../../components/arTab.vue'
 import arTransfer from '../../../../components/arTransfer.vue'
 import { capitalApplication } from './capitalApplictionAPI'
+import { commonAPI } from '../../../../service/api/commonAPI'
 export default {
   data() {
     return {
@@ -298,13 +302,22 @@ export default {
           infoName: '支付令',
           isNotEmpty: 'N'
         }
-      ]
+      ],
+      homeMenu: []
     }
   },
   mounted() {
     this.carouselWidth = this.$refs['scroll-content'].offsetWidth
     this.initCarousle()
     this.initTabs()
+    // 获取menu
+    commonAPI.getHomeMenu().then(res => {
+      if (res.data.flag === 'SUCCESS') {
+        this.homeMenu = res.data.data
+      } else {
+        this.$message.error(res.data.msg)
+      }
+    })
   },
   methods: {
     tdChange(obj) {

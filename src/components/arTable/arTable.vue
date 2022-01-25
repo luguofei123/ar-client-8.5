@@ -15,16 +15,23 @@
       :summary-method="getSummaries"
     >
       <ux-table-column fixed="left" type="checkbox" header-align="center" align="center" width="50" v-if="isShowCheckbox"> </ux-table-column>
-      <ux-table-column fixed="left" type="index" header-align="center" align="center" width="50" title="序号" v-if="isShowIndex"></ux-table-column>
+      <ux-table-column fixed="left" type="index" header-align="center" align="center" width="50" title="序号" v-if="isShowIndex">
+        <template v-slot:header="{ column }" v-if="isSettingColumn">
+          <span title="设置表头" @click="$emit('settingColumn', column)">
+            <i class="el-icon-s-operation"></i>
+          </span>
+        </template>
+      </ux-table-column>
       <template v-for="(item, index) in columnList">
-        <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit"></tableColumn>
+        <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit" :sortable="sortable"></tableColumn>
       </template>
       <ux-table-column fixed="right" header-align="center" align="center" title="操作" :width="operateWidth">
-        <template>
+        <template slot-scope="scope">
           <div class="oparation" style="display: inline-block; white-space: nowrap">
-            <span type="text">查看</span>
-            <span type="text">编辑</span>
-            <span type="text">编辑</span>
+            <!-- 业务办理 -->
+            <template v-if="tabType === 'HOME_BG'">
+              <optHomebg :scope="scope" :homeMenu="homeMenu"></optHomebg>
+            </template>
           </div>
         </template>
       </ux-table-column>
@@ -35,6 +42,7 @@
 <script>
 import tableColumn from './tableColumn.vue'
 import { toThousandFix } from '../../commonUtils/utils/util'
+import optHomebg from './operationButton/optHomebg.vue'
 export default {
   name: 'editTable',
   data() {
@@ -43,7 +51,7 @@ export default {
       tableHeight: 200
     }
   },
-  props: ['isShowCheckbox', 'isShowIndex', 'columnList', 'tableData', 'isEdit', 'isShowSum'],
+  props: ['isShowCheckbox', 'isShowIndex', 'isSettingColumn', 'columnList', 'tableData', 'isEdit', 'isShowSum', 'sortable', 'tabType', 'homeMenu'],
   methods: {
     tdChange(obj) {
       this.$emit('tdChange', obj)
@@ -137,7 +145,8 @@ export default {
     }
   },
   components: {
-    tableColumn
+    tableColumn,
+    optHomebg
   }
 }
 </script>

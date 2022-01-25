@@ -36,6 +36,7 @@
           :isEdit="false"
           :isShowCheckbox="true"
           :isShowIndex="true"
+          :isSettingColumn="true"
         ></arTable>
       </div>
       <div class="pagination">
@@ -70,6 +71,7 @@ import { myBill } from './myBillAPI'
 export default {
   data() {
     return {
+      commonData: {},
       showDialog: false,
       carouselArr: [],
       TransferDataList: [],
@@ -351,6 +353,7 @@ export default {
     }
   },
   mounted() {
+    this.commonData = this.$getCommonData
     this.carouselWidth = this.$refs['scroll-content'].offsetWidth
     this.initCarousle()
     this.initTabs()
@@ -462,7 +465,7 @@ export default {
       })
       params = {
         billType: '',
-        coCode: '006002001',
+        coCode: this.commonData.svAgencyCode,
         endDate: 1642867200000,
         inputorId: 'AR01',
         invoiceStatus: '',
