@@ -2,16 +2,16 @@
 <template>
   <div>
     <!-- 单据头部 -->
-    <headAre></headAre>
+    <headAre :tplData="tplData"></headAre>
     <div class="leftBox">
-      <div v-for="(item, index) in tplData.areaLeft" :key="index">
+      <div v-for="(item, index) in tplData.areaLeft" :key="index" :id="item.areaType">
         <!-- 关联区域 -->
         <div v-if="item.areaType === 'RELATION'">
           <relationAre></relationAre>
         </div>
         <!-- 基础区域 -->
         <div v-if="item.areaType === 'BASE'">
-          <baseAre></baseAre>
+          <baseAre :tplData="tplData" :itemData="item"></baseAre>
         </div>
         <!-- 费用区域 -->
         <div v-if="item.areaType === 'DETAIL'">

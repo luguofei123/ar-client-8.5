@@ -1,10 +1,10 @@
 <template>
-  <div>头部</div>
+  <div>指标区域</div>
 </template>
 
 <script>
 export default {
-  name: 'billHead',
+  name: 'budgetAre',
   data() {
     return {}
   },

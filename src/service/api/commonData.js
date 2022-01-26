@@ -44,12 +44,12 @@ export const getCommonData = () =>{
       svRoleName: "经办人",
       svSetYear: "2022",
       svSnum: "2",
-      svSysDate: "2022-01-24 13:43:55",
-      svTransDate: "2022-01-24",
+      svSysDate: "2022-01-26 13:46:36",
+      svTransDate: "2022-01-26",
       svUserCode: "cwy999",
       svUserId: "9522",
       svUserName: "侯彦",
-      token: "445072417"
+      token: "16506090"
     }
   }
   return _commonData
