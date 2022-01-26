@@ -4,7 +4,7 @@
     <!-- 单据头部 -->
     <headAre :tplData="tplData"></headAre>
     <div class="leftBox">
-      <div v-for="(item, index) in tplData.areaLeft" :key="index" :id="item.areaType">
+      <div v-for="(item, index) in tplData.areaLeft" :key="index" :id="item.areaType" class="spread">
         <!-- 关联区域 -->
         <div v-if="item.areaType === 'RELATION'">
           <relationAre></relationAre>
@@ -85,4 +85,12 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.leftBox {
+  padding: 8px 8px 0px;
+  .spread {
+    margin-bottom: 8px;
+    box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 20%);
+  }
+}
+</style>

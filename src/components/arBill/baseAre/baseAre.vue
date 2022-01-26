@@ -3,7 +3,7 @@
     <el-collapse v-model="activeName">
       <el-collapse-item>
         <template slot="title">
-          <div class="base-header" @click.stop="cancelHeaderClickFn">
+          <div class="base-header" @click="cancelHeaderClickFn">
             <img src="../../../assets/img/decorate_icon_normal.png" alt="" />
             <span class="title-class">{{ '基本信息' }}</span>
           </div>
