@@ -7,7 +7,7 @@
       <div v-for="(item, index) in tplData.areaLeft" :key="index" :id="item.areaType" class="spread">
         <!-- 关联区域 -->
         <div v-if="item.areaType === 'RELATION'">
-          <relationAre></relationAre>
+          <relationAre :tplData="tplData" :itemData="item"></relationAre>
         </div>
         <!-- 基础区域 -->
         <div v-if="item.areaType === 'BASE'">
@@ -15,19 +15,19 @@
         </div>
         <!-- 费用区域 -->
         <div v-if="item.areaType === 'DETAIL'">
-          <expenseAre></expenseAre>
+          <expenseAre :tplData="tplData" :itemData="item"></expenseAre>
         </div>
         <!-- 指标区域 -->
         <div v-if="item.areaType === 'BUDGET'">
-          <budgetAre></budgetAre>
+          <budgetAre :tplData="tplData" :itemData="item"></budgetAre>
         </div>
         <!-- 附件区域 -->
         <div v-if="item.areaType === 'FILE'">
-          <fileAre></fileAre>
+          <fileAre :tplData="tplData" :itemData="item"></fileAre>
         </div>
         <!-- 结算区域 -->
         <div v-if="item.areaType === 'SETTMENT'">
-          <settlementAre></settlementAre>
+          <settlementAre :tplData="tplData" :itemData="item"></settlementAre>
         </div>
       </div>
     </div>
@@ -94,6 +94,11 @@ export default {
   .spread {
     margin-bottom: 8px;
     box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 20%);
+  }
+  ::v-deep .el-collapse-item__header {
+    height: 40px;
+    line-height: 40px;
+    color: #333;
   }
 }
 </style>

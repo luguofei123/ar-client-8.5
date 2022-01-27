@@ -86,12 +86,16 @@ $backgroundColor: #06f;
   }
 }
 .el-icon-caret-bottom.is-reverse {
-  transform: rotateZ(-180deg);
+  transform: rotateZ(0deg);
+}
+.el-icon-caret-bottom {
+  transform: rotateZ(180deg);
 }
 // 其他icon 20px
 .el-input__icon {
   line-height: 32px;
   color: #666;
+  // width: 20px;
   font-size: 20px;
 }
 // 日期icon  12px

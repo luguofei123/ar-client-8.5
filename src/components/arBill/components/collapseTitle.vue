@@ -16,8 +16,8 @@ export default {
   name: 'collapseTitle',
   props: ['aliasName'],
   methods: {
-    cancelHeaderClick() {
-      this.$emit('cancelHeaderClickFn', false)
+    cancelHeaderClickFn() {
+      return false
     }
   }
 }

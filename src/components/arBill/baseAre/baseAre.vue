@@ -18,7 +18,7 @@
 </template>
 
 <script>
-const arForm = () => import('../../arForm/arForm.vue') // collapseTitle
+const arForm = () => import('../../arForm/arForm.vue')
 const collapseTitle = () => import('../components/collapseTitle.vue')
 export default {
   name: 'baseAre',
@@ -42,12 +42,4 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
-.baseAre {
-  ::v-deep .el-collapse-item__header {
-    height: 40px;
-    line-height: 40px;
-    color: #333;
-  }
-}
-</style>
+<style scoped lang="scss"></style>
