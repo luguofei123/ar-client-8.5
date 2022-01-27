@@ -96,7 +96,7 @@ $backgroundColor: #06f;
   line-height: 32px;
   color: #666;
   // width: 20px;
-  font-size: 20px;
+  // font-size: 20px;
 }
 // 日期icon  12px
 .el-input__icon.el-icon-date {
@@ -158,8 +158,25 @@ $backgroundColor: #06f;
     top: 3px;
     color: #666;
   }
+  .el-date-editor .el-input__prefix {
+    position: absolute;
+    left: auto;
+    right: 0;
+    top: 0px;
+    color: #666;
+  }
+  .el-date-editor .el-input__suffix {
+    position: absolute;
+    left: auto;
+    right: 20px;
+    top: 0px;
+    color: #666;
+  }
+  .el-date-editor .el-input--prefix .el-input__inner {
+    padding-left: 0px;
+  }
   .el-select .el-input .el-select__caret {
-    font-size: 20px;
+    // font-size: 20px;
     color: #666;
   }
   .el-icon-arrow-up:before {

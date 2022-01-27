@@ -42,7 +42,7 @@ export default {
   methods: {
     toStepNormal(index) {
       this.nowIndex = index
-      // setTimeout(() => {
+      // setTimeout(() => {  // arBillType
       //   $('.el-step__line-inner').css({
       //     width: '100%'
       //   })

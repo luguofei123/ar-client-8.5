@@ -11,7 +11,7 @@
       </el-popover>
       <span class="sign"> </span>
     </span>
-    <span :class="['formItemValue', isError ? 'is-error' : '']" :style="dateWidth(item)">
+    <span :class="['formItemValue arForm', isError ? 'is-error' : '']" :style="dateWidth(item)">
       <!--    <el-popover placement="top" trigger="hover" class="value" :disabled="isShowTips(value, item)">-->
       <el-tooltip effect="dark" placement="top" :disabled="isShowTips(value, item)">
         <template slot="content" v-if="value">

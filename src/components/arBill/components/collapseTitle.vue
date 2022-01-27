@@ -31,12 +31,12 @@ export default {
   font-size: 14px;
   .title {
     font-weight: 600;
-    margin-left: 10px;
-    margin-right: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
     display: flex;
     align-items: center;
     img {
-      margin-right: 5px;
+      margin-right: 12px;
     }
     .text {
       color: #333 !important;

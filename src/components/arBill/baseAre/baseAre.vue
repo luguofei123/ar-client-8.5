@@ -3,13 +3,9 @@
     <el-collapse v-model="activeName">
       <el-collapse-item>
         <template slot="title">
-          <collapseTitle :aliasName="itemData.aliasName">
-            <span>测试</span>
-            <span>测试</span>
-            <span>测试</span>
-          </collapseTitle>
+          <collapseTitle :aliasName="itemData.aliasName"> </collapseTitle>
         </template>
-        <div class="base-form" id="base-form">
+        <div class="baseForm" id="base-form">
           <arForm :itemsSource="itemData.infoList" :dataSource="{}" ref="zform"> </arForm>
         </div>
       </el-collapse-item>
@@ -42,4 +38,9 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.baseForm {
+  padding-right: 48px;
+  font-size: 14px;
+}
+</style>

@@ -263,71 +263,71 @@ $fontColor: #666;
         flex: 1;
         height: auto;
       }
-      .errorText {
-      }
+      // .errorText {
+      // }
     }
   }
 }
-.searchTerms {
-  .formContainer {
-    .formMain {
-      .formItem {
-        padding-top: 0;
-        .unit {
-          top: 8px;
-          right: 9px;
-        }
-      }
-    }
-  }
-}
+// .searchTerms {
+//   .formContainer {
+//     .formMain {
+//       .formItem {
+//         padding-top: 0;
+//         .unit {
+//           top: 8px;
+//           right: 9px;
+//         }
+//       }
+//     }
+//   }
+// }
 // 自定义日期选择样式
-.customDatePicker {
-  .gov-calendar-header {
-    line-height: normal;
-  }
-  .gov-calendar-time-picker {
-    top: 64px;
-  }
-  .timeHeader {
-    height: 24px;
-    line-height: 24px;
-    display: flex;
-    span {
-      flex: 1;
-      background-color: #ddd;
-      text-align: left;
-      padding-left: 32px;
-      border-right: 1px solid #bbb;
-    }
-    span:last-child {
-      border-right: 1px solid #ddd;
-    }
-  }
-}
+// .customDatePicker {
+//   .gov-calendar-header {
+//     line-height: normal;
+//   }
+//   .gov-calendar-time-picker {
+//     top: 64px;
+//   }
+//   .timeHeader {
+//     height: 24px;
+//     line-height: 24px;
+//     display: flex;
+//     span {
+//       flex: 1;
+//       background-color: #ddd;
+//       text-align: left;
+//       padding-left: 32px;
+//       border-right: 1px solid #bbb;
+//     }
+//     span:last-child {
+//       border-right: 1px solid #ddd;
+//     }
+//   }
+// }
 // 出差地点ui调整
-.el-cascader-node:hover{
-  background: rgba(0,102,255,.1)!important;
-}
-.el-cascader-node.in-active-path,
-.el-cascader-node.is-active {
-  color: #333!important;
-  font-weight: normal;
-  font-size: 14px;
-}
-.el-cascader-node:not(.is-disabled):focus, .el-cascader-node:not(.is-disabled):hover {
-  background: rgba(0,102,255,.1)!important;
-}
-.el-cascader-node.is-selectable.in-checked-path {
-  color: #333!important;
-  font-weight: normal;
-  font-size: 14px;
-  font-weight: 500!important;
-  background: #fff;
-}
-.el-cascader-menu {
-  color: #333333;
-}
-.formItemWapper .ant-input[disabled] {
-  background-color: #fff;
-}
+// .el-cascader-node:hover{
+//   background: rgba(0,102,255,.1)!important;
+// }
+// .el-cascader-node.in-active-path,
+// .el-cascader-node.is-active {
+//   color: #333!important;
+//   font-weight: normal;
+//   font-size: 14px;
+// }
+// .el-cascader-node:not(.is-disabled):focus, .el-cascader-node:not(.is-disabled):hover {
+//   background: rgba(0,102,255,.1)!important;
+// }
+// .el-cascader-node.is-selectable.in-checked-path {
+//   color: #333!important;
+//   font-weight: normal;
+//   font-size: 14px;
+//   font-weight: 500!important;
+//   background: #fff;
+// }
+// .el-cascader-menu {
+//   color: #333333;
+// }
+// .formItemWapper .ant-input[disabled] {
+//   background-color: #fff;
+// }
