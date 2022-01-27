@@ -32,7 +32,7 @@ module.exports = {
     port: 8085,
     proxy: {
       '/A/ar/api/': {
-        target: 'http://10.16.24.100',
+        target: 'http://10.10.65.250:9999',
         changeOrigin: true,
         secure: false
       },

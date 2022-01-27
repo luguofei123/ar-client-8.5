@@ -46,7 +46,7 @@ instance.interceptors.request.use(
       request.url = request.url.replace('/A/ar/api', '')
     }
     if (process.env.NODE_ENV === 'development') {
-      request.headers.tokenid = '25232889'
+      request.headers.tokenid = '304156176'
     }
     if (request.method === 'get') {
       request.params = {

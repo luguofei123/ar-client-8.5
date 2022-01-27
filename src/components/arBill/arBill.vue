@@ -48,11 +48,14 @@ export default {
   name: 'arBill',
   data() {
     return {
+      commonData: {},
       tplData: {}
     }
   },
   props: {},
-  created() {},
+  created() {
+    this.commonData = this.$getCommonData
+  },
   mounted() {
     this.initTemplate()
   },
@@ -62,8 +65,8 @@ export default {
       let params = {
         billId: '',
         billType: 'EXP_TRIP',
-        coCode: '999001',
-        roleCode: '999001',
+        coCode: this.commonData.svAgencyCode,
+        roleCode: this.commonData.svRoleCode,
         templetCode: '',
         urlType: 'todo'
       }

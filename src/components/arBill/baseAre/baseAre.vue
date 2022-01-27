@@ -3,10 +3,11 @@
     <el-collapse v-model="activeName">
       <el-collapse-item>
         <template slot="title">
-          <div class="base-header" @click="cancelHeaderClickFn">
-            <img src="../../../assets/img/decorate_icon_normal.png" alt="" />
-            <span class="title-class">{{ '基本信息' }}</span>
-          </div>
+          <collapseTitle :aliasName="itemData.aliasName">
+            <span>测试</span>
+            <span>测试</span>
+            <span>测试</span>
+          </collapseTitle>
         </template>
         <div class="base-form" id="base-form">
           <arForm :itemsSource="itemData.infoList" :dataSource="{}" ref="zform"> </arForm>
@@ -17,7 +18,8 @@
 </template>
 
 <script>
-const arForm = () => import('../../arForm/arForm.vue')
+const arForm = () => import('../../arForm/arForm.vue') // collapseTitle
+const collapseTitle = () => import('../components/collapseTitle.vue')
 export default {
   name: 'baseAre',
   props: ['tplData', 'itemData'],
@@ -35,6 +37,7 @@ export default {
   mounted() {},
   watch: {},
   components: {
+    collapseTitle,
     arForm
   }
 }
@@ -44,6 +47,7 @@ export default {
   ::v-deep .el-collapse-item__header {
     height: 40px;
     line-height: 40px;
+    color: #333;
   }
 }
 </style>
