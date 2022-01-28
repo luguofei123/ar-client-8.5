@@ -1,6 +1,6 @@
 <!-- 单据模板 -->
 <template>
-  <div>
+  <div class="arBill">
     <!-- 单据头部 -->
     <headAre :tplData="tplData"></headAre>
     <div class="leftBox">
@@ -31,6 +31,8 @@
         </div>
       </div>
     </div>
+    <div class="right"></div>
+    <div class="footer"></div>
   </div>
   <!--  -->
 </template>
@@ -89,8 +91,22 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.arBill {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.leftBoxWrapp {
+  // width: calc(100%-300px);
+}
 .leftBox {
   padding: 8px 8px 0px;
+  overflow: auto;
+  position: absolute;
+  bottom: 50px;
+  top: 80px;
+  left: 0;
+  right: 300px;
   .spread {
     margin-bottom: 8px;
     box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 20%);
@@ -100,5 +116,21 @@ export default {
     line-height: 40px;
     color: #333;
   }
+}
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 50px;
+  right: 300px;
+  background: red;
+}
+.right {
+  position: absolute;
+  width: 300px;
+  top: 80px;
+  bottom: 0;
+  right: 0px;
+  background: #fff;
 }
 </style>

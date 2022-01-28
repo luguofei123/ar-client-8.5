@@ -7,6 +7,8 @@
         </template>
         <div class="baseForm" id="base-form">
           <arForm :itemsSource="itemData.infoList" :dataSource="{}" ref="zform"> </arForm>
+          <arForm :itemsSource="itemData.infoList" :dataSource="{}" ref="zform"> </arForm>
+          <arForm :itemsSource="itemData.infoList" :dataSource="{}" ref="zform"> </arForm>
         </div>
       </el-collapse-item>
     </el-collapse>

@@ -96,9 +96,12 @@ $backgroundColor: #06f;
   line-height: 32px;
   color: #666;
   // width: 20px;
-  // font-size: 20px;
+  font-size: 20px;
 }
 // 日期icon  12px
+.el-input__icon.el-icon-circle-close {
+  font-size: 12px;
+}
 .el-input__icon.el-icon-date {
   font-size: 12px;
 }
@@ -108,9 +111,17 @@ $backgroundColor: #06f;
 .el-icon-circle-close {
   color: #666;
 }
+.el-input--prefix .el-input__inner {
+  padding-left: 10px;
+}
 .el-input__clear.el-input__icon.el-icon-circle-close {
   position: absolute;
+  color: #666;
   left: -18px;
+  font-size: 14px;
+}
+.el-select__caret.el-input__icon.el-icon-arrow-up {
+  font-size: 20px;
 }
 // 对话框样式重写
 .el-dialog {
@@ -163,6 +174,9 @@ $backgroundColor: #06f;
     left: auto;
     right: 0;
     top: 0px;
+    color: #666;
+  }
+  .el-date-editor .el-range__close-icon {
     color: #666;
   }
   .el-date-editor .el-input__suffix {
