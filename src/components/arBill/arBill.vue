@@ -31,8 +31,11 @@
         </div>
       </div>
     </div>
-    <div class="right"></div>
-    <div class="footer"></div>
+    <rightBar></rightBar>
+    <footerBar></footerBar>
+    <div class="pullRightButton" @click="collapseRightBar">
+      <i class="el-icon-arrow-right"></i>
+    </div>
   </div>
   <!--  -->
 </template>
@@ -46,12 +49,15 @@ const expenseAre = () => import('./expenseAre/expenseAre.vue')
 const fileAre = () => import('./fileAre/fileAre.vue')
 const relationAre = () => import('./relationAre/relationAre.vue')
 const settlementAre = () => import('./settlementAre/settlementAre.vue')
+const rightBar = () => import('./rightBar/rightBar.vue')
+const footerBar = () => import('./footerBar/footerBar.vue')
 export default {
   name: 'arBill',
   data() {
     return {
       commonData: {},
-      tplData: {}
+      tplData: {},
+      showRightSideFlag: true
     }
   },
   props: {},
@@ -77,6 +83,24 @@ export default {
           this.tplData = res.data.data
         }
       })
+    },
+    collapseRightBar() {
+      let leftBox = document.querySelector('.arBill>.leftBox')
+      let rightBox = document.querySelector('.arBill>.rightBox')
+      let pullRightButton = document.querySelector('.arBill>.pullRightButton')
+      let footBox = document.querySelector('.arBill>.footBox')
+      if (this.showRightSideFlag) {
+        rightBox.style.width = '0'
+        pullRightButton.style.right = '0'
+        leftBox.style.width = '100%'
+        footBox.style.width = '100%'
+      } else {
+        rightBox.style.width = `300px`
+        pullRightButton.style.right = '300px'
+        leftBox.style.width = `calc(100% - 300px)`
+        footBox.style.width = `calc(100% - 310px)`
+      }
+      this.showRightSideFlag = !this.showRightSideFlag
     }
   },
   components: {
@@ -86,7 +110,9 @@ export default {
     expenseAre,
     fileAre,
     relationAre,
-    settlementAre
+    settlementAre,
+    rightBar,
+    footerBar
   }
 }
 </script>
@@ -95,42 +121,53 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-}
-.leftBoxWrapp {
-  // width: calc(100%-300px);
-}
-.leftBox {
-  padding: 8px 8px 0px;
-  overflow: auto;
-  position: absolute;
-  bottom: 50px;
-  top: 80px;
-  left: 0;
-  right: 300px;
-  .spread {
-    margin-bottom: 8px;
-    box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 20%);
+  .leftBox {
+    padding: 8px 8px 0px;
+    overflow: auto;
+    position: absolute;
+    width: calc(100% - 300px);
+    bottom: 50px;
+    top: 80px;
+    left: 0;
+    .spread {
+      margin-bottom: 8px;
+      box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 20%);
+    }
+    ::v-deep .el-collapse-item__header {
+      height: 40px;
+      line-height: 40px;
+      color: #333;
+    }
   }
-  ::v-deep .el-collapse-item__header {
-    height: 40px;
-    line-height: 40px;
-    color: #333;
+  .pullRightButton {
+    position: absolute;
+    right: 300px;
+    top: 50%;
+    color: #06f;
+    .el-icon-arrow-right {
+      position: absolute;
+      right: -2px;
+      top: 18px;
+    }
+    &::before {
+      box-sizing: content-box;
+      width: 0px;
+      height: 35px;
+      position: absolute;
+      right: 0px;
+      top: 0%;
+      padding: 0;
+      border-right: 12px solid #ffffff;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      display: block;
+      content: '';
+    }
+    &:hover {
+      cursor: pointer;
+    }
   }
-}
-.footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  height: 50px;
-  right: 300px;
-  background: red;
-}
-.right {
-  position: absolute;
-  width: 300px;
-  top: 80px;
-  bottom: 0;
-  right: 0px;
-  background: #fff;
 }
 </style>
