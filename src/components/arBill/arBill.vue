@@ -89,16 +89,19 @@ export default {
       let rightBox = document.querySelector('.arBill>.rightBox')
       let pullRightButton = document.querySelector('.arBill>.pullRightButton')
       let footBox = document.querySelector('.arBill>.footBox')
+      let icon = document.querySelector('.arBill>.pullRightButton>i')
       if (this.showRightSideFlag) {
         rightBox.style.width = '0'
         pullRightButton.style.right = '0'
         leftBox.style.width = '100%'
         footBox.style.width = '100%'
+        icon.setAttribute('class', 'el-icon-arrow-left')
       } else {
         rightBox.style.width = `300px`
         pullRightButton.style.right = '300px'
         leftBox.style.width = `calc(100% - 300px)`
         footBox.style.width = `calc(100% - 310px)`
+        icon.setAttribute('class', 'el-icon-arrow-right')
       }
       this.showRightSideFlag = !this.showRightSideFlag
     }
@@ -144,6 +147,7 @@ export default {
     right: 300px;
     top: 50%;
     color: #06f;
+    .el-icon-arrow-left,
     .el-icon-arrow-right {
       position: absolute;
       right: -2px;
