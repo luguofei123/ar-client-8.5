@@ -9,11 +9,11 @@
       <span>2022-01-29</span>
     </div>
     <div class="footButton">
-      <el-button>按钮</el-button>
-      <el-button>按钮</el-button>
-      <el-button>按钮</el-button>
-      <el-button>按钮</el-button>
-      <el-button>按钮</el-button>
+      <span>暂存</span>
+      <span class="blue">暂存</span>
+      <span>暂存</span>
+      <span>暂存</span>
+      <span>暂存</span>
     </div>
   </div>
 </template>
@@ -42,11 +42,34 @@ export default {
   background: #fff;
   border-top: 1px solid #bbb;
   align-items: center;
-  padding: 0 10px 0 15px;
+  padding: 0 0px 0 15px;
   .footMsg {
     font-size: 12px;
     span {
       margin-right: 6px;
+    }
+  }
+  .footButton {
+    span {
+      display: inline-block;
+      min-width: 72px;
+      margin-right: 8px;
+      padding: 0 16px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      background: white;
+      color: #333333;
+      border-radius: 4px;
+      border: 1px solid #bbbbbb;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    span.blue {
+      background: #0066ff;
+      color: #fff;
+      border: 1px solid #0066ff;
     }
   }
 }
