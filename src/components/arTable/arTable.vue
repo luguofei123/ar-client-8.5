@@ -25,12 +25,15 @@
       <template v-for="(item, index) in columnList">
         <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit" :sortable="sortable"></tableColumn>
       </template>
-      <ux-table-column fixed="right" header-align="center" align="center" title="操作" :width="operateWidth">
+      <ux-table-column fixed="right" header-align="center" align="left" title="操作" :width="operateWidth">
         <template slot-scope="scope">
           <div class="oparation" style="display: inline-block; white-space: nowrap">
             <!-- 业务办理 -->
             <template v-if="tabType === 'HOME_BG'">
               <optHomebg :scope="scope" :homeMenu="homeMenu"></optHomebg>
+            </template>
+            <template v-if="tabType === 'HOME_APPLY' || tabType === 'HOME_LOAN' || tabType === 'HOME_EXP'">
+              <optHomebgex :scope="scope" :homeMenu="homeMenu" :tabType="tabType"></optHomebgex>
             </template>
           </div>
         </template>
@@ -43,6 +46,7 @@
 import tableColumn from './tableColumn.vue'
 import { toThousandFix } from '../../commonUtils/utils/util'
 import optHomebg from './operationButton/optHomebg.vue'
+import optHomebgex from './operationButton/optHomebgex.vue'
 export default {
   name: 'editTable',
   data() {
@@ -146,7 +150,8 @@ export default {
   },
   components: {
     tableColumn,
-    optHomebg
+    optHomebg,
+    optHomebgex
   }
 }
 </script>

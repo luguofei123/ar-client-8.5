@@ -1,9 +1,9 @@
 
 
-export const getCommonData = () =>{
+export const getCommonData = () => {
   let _commonData = null
   _commonData = JSON.parse(localStorage.getItem('commonData'))
-  if(_commonData){
+  if (_commonData) {
     _commonData.svFiscalPeriod = Base64.decode(_commonData.svFiscalPeriod)
     _commonData.svDistCode = Base64.decode(_commonData.svDistCode)
     _commonData.svMenuId = Base64.decode(_commonData.svMenuId)
@@ -26,7 +26,7 @@ export const getCommonData = () =>{
     if (_commonData.orgCode !== undefined) {
       _commonData.orgCode = Base64.decode(_commonData.orgCode)
     }
-  }else {
+  } else {
     _commonData = {
       svAcctCode: "001",
       svAcctName: "行政账",
@@ -34,7 +34,7 @@ export const getCommonData = () =>{
       svAgencyName: "基层单位L1",
       svDistCode: "000000",
       svDistName: "默认区划",
-      svFiscalPeriod: "1",
+      svFiscalPeriod: "2",
       svIsPower: "0",
       svMenuId: null,
       svRgCode: "87",
@@ -44,12 +44,12 @@ export const getCommonData = () =>{
       svRoleName: "报销制单岗（AR)",
       svSetYear: "2022",
       svSnum: "1",
-      svSysDate: "2022-01-27 09:23:21",
-      svTransDate: "2022-01-27",
+      svSysDate: "2022-02-09 16:18:06",
+      svTransDate: "2022-02-09",
       svUserCode: "AR01",
       svUserId: "9702",
       svUserName: "AR01-报销制单",
-      token: "940028457"
+      token: "27403029"
     }
   }
   return _commonData

@@ -23,7 +23,7 @@
         </ul>
       </el-popover>
       <template v-if="scope.row.applyBillType && scope.row.loanBillType.length === 1">
-        <span @click="billClick($event, item, scope.row.loanBillType[0])">借款</span>
+        <span @click="billClick($event, scope.row.loanBillType[0], scope.row)">借款</span>
       </template>
     </template>
     <template v-if="scope.row.expBillType && scope.row.expBillType.length > 0">
@@ -36,7 +36,7 @@
         </ul>
       </el-popover>
       <template v-if="scope.row.applyBillType && scope.row.expBillType.length === 1">
-        <span @click="billClick($event, item, scope.row.expBillType[0])">直接报销</span>
+        <span @click="billClick($event, scope.row.expBillType[0], scope.row)">直接报销</span>
       </template>
     </template>
   </div>

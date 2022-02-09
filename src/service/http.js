@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import Vue from 'vue'
-import {globConfig} from '@/assets/js/config'
+import { globConfig } from '@/assets/js/config'
 // 创建实例
 const instance = axios.create({
   timeout: 5000,
@@ -12,7 +12,7 @@ let needLoadingRequestCount = 0
 let loadingService = null
 function showLoading() {
   if (needLoadingRequestCount === 0) {
-    loadingService = Vue.prototype.$loadingService({ fullscreen: true,text:'加载中...' })
+    loadingService = Vue.prototype.$loadingService({ fullscreen: true, text: '加载中...' })
   }
   needLoadingRequestCount += 1
 }
@@ -46,7 +46,7 @@ instance.interceptors.request.use(
       request.url = request.url.replace('/A/ar/api', '')
     }
     if (process.env.NODE_ENV === 'development') {
-      request.headers.tokenid = '848792292'
+      request.headers.tokenid = '27403029'
     }
     if (request.method === 'get') {
       request.params = {
@@ -68,8 +68,8 @@ instance.interceptors.request.use(
       !request.url.includes('fbpm-modeler') &&
       !request.url.includes('getCacheVersion')
     ) {
-       showLoading()
-    }    
+      showLoading()
+    }
     return request
   },
   error => Promise.error(error)
@@ -85,22 +85,22 @@ instance.interceptors.response.use(response => {
     return Promise.reject(response)
   }
 },
-error => {
-  closeLoading()
-  if (error.response) {
-    debugger
-    switch (error.response.status) {
-      // 返回 401 清除token信息并跳转到登录页面
-      case 401: {
-        console.log('路由跳转')
-        if (process.env.NODE_ENV == 'development') {
-          window.parent.location.href = '/pf/portal/login/login.html'
-        }
-        closeLoading()
-      }
-    }
+  error => {
     closeLoading()
-    return Promise.reject(error.response.data)
-  }
-})
+    if (error.response) {
+      debugger
+      switch (error.response.status) {
+        // 返回 401 清除token信息并跳转到登录页面
+        case 401: {
+          console.log('路由跳转')
+          if (process.env.NODE_ENV == 'development') {
+            window.parent.location.href = '/pf/portal/login/login.html'
+          }
+          closeLoading()
+        }
+      }
+      closeLoading()
+      return Promise.reject(error.response.data)
+    }
+  })
 export default instance

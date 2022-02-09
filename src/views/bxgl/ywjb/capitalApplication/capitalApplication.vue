@@ -382,7 +382,14 @@ export default {
         reportType: item.sourceCode,
         roleIdLs: this.$getCommonData.svRoleId,
         searchKeyWord: this.searchKeyWord,
-        startDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
+        // startDate: new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getTime(),
+        startDate: new Date(
+          new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).setFullYear(
+            new Date(this.$getCommonData.svTransDate.replace(/-/g, '/')).getFullYear(),
+            0,
+            1
+          )
+        ).getTime(),
         userId: this.$getCommonData.svUserCode
       }
       capitalApplication.getTableData(param).then(res => {
