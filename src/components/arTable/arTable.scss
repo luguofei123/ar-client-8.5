@@ -28,6 +28,13 @@ $footerBgColor: #fffad6;
           height: $RowHeight;
           color: $colorHeader;
           font-weight: normal;
+          .elx-cell--title{
+            padding: 0 5px;
+          }
+          .elx-cell--sort{
+            position: absolute;
+            right: 0;
+          }
         }
       }
     }

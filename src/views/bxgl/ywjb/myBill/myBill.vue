@@ -36,6 +36,7 @@
           :isEdit="false"
           :isShowCheckbox="true"
           :isShowIndex="true"
+          :sortable="true"
           :isSettingColumn="true"
         ></arTable>
       </div>

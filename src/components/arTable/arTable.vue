@@ -25,7 +25,7 @@
       <template v-for="(item, index) in columnList">
         <tableColumn :key="index" :item="item" @tdChange="tdChange" :isEdit="isEdit" :sortable="sortable"></tableColumn>
       </template>
-      <ux-table-column fixed="right" header-align="center" align="left" title="操作" :width="operateWidth">
+      <ux-table-column fixed="right" header-align="left" align="left" title="操作" :width="operateWidth">
         <template slot-scope="scope">
           <div class="oparation" style="display: inline-block; white-space: nowrap">
             <!-- 业务办理 -->
