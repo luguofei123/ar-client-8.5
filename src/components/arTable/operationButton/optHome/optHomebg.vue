@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { operationButton } from './operationButton'
+import { operationButton } from '../operationButton'
 export default {
   name: 'optHomebg',
   mixins: [operationButton],

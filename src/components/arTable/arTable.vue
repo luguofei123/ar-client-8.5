@@ -29,11 +29,12 @@
         <template slot-scope="scope">
           <div class="oparation" style="display: inline-block; white-space: nowrap">
             <!-- 业务办理 -->
-            <template v-if="tabType === 'HOME_BG'">
-              <optHomebg :scope="scope" :homeMenu="homeMenu"></optHomebg>
+            <template v-if="pageType === 'capitaApplication'">
+              <optHome :scope="scope" :homeMenu="homeMenu" :tabType="tabType"></optHome>
             </template>
-            <template v-if="tabType === 'HOME_APPLY' || tabType === 'HOME_LOAN' || tabType === 'HOME_EXP'">
-              <optHomebgex :scope="scope" :homeMenu="homeMenu" :tabType="tabType"></optHomebgex>
+            <!-- 我的报销等其他页面的操作栏-->
+            <template v-if="pageType === 'list'">
+              <optExp :scope="scope" :homeMenu="homeMenu" :tabType="tabType" :pageName="pageName"></optExp>
             </template>
           </div>
         </template>
@@ -45,8 +46,8 @@
 <script>
 import tableColumn from './tableColumn.vue'
 import { toThousandFix } from '../../commonUtils/utils/util'
-import optHomebg from './operationButton/optHomebg.vue'
-import optHomebgex from './operationButton/optHomebgex.vue'
+import optHome from './operationButton/optHome/optHome.vue'
+import optExp from './operationButton/optExp/optExp.vue'
 export default {
   name: 'editTable',
   data() {
@@ -55,7 +56,20 @@ export default {
       tableHeight: 200
     }
   },
-  props: ['isShowCheckbox', 'isShowIndex', 'isSettingColumn', 'columnList', 'tableData', 'isEdit', 'isShowSum', 'sortable', 'tabType', 'homeMenu'],
+  props: [
+    'isShowCheckbox',
+    'isShowIndex',
+    'isSettingColumn',
+    'columnList',
+    'tableData',
+    'isEdit',
+    'isShowSum',
+    'sortable',
+    'pageType',
+    'pageName',
+    'tabType',
+    'homeMenu'
+  ],
   methods: {
     tdChange(obj) {
       this.$emit('tdChange', obj)
@@ -150,8 +164,8 @@ export default {
   },
   components: {
     tableColumn,
-    optHomebg,
-    optHomebgex
+    optHome,
+    optExp
   }
 }
 </script>

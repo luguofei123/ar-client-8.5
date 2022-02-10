@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { operationButton } from './operationButton'
+import { operationButton } from '../operationButton'
 export default {
   name: 'optHomebgex',
   mixins: [operationButton],

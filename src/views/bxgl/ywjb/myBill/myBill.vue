@@ -38,6 +38,9 @@
           :isShowIndex="true"
           :sortable="true"
           :isSettingColumn="true"
+          :pageType="'list'"
+          :pageName="'list'"
+          :homeMenu="homeMenu"
         ></arTable>
       </div>
       <div class="pagination">
@@ -69,6 +72,8 @@ import arTab from '../../../../components/arTab.vue'
 import arSearch from '../../../../components/arSearch.vue'
 import arTransfer from '../../../../components/arTransfer.vue'
 import { myBill } from './myBillAPI'
+import { commonAPI } from '../../../../service/api/commonAPI'
+
 export default {
   data() {
     return {
@@ -350,7 +355,8 @@ export default {
       ],
       searchParams: {},
       pTypes: ['EXPENSE', 'REPAY', 'LOAN'],
-      payTypes: 'PAY_STATE_SEARCH'
+      payTypes: 'PAY_STATE_SEARCH',
+      homeMenu: []
     }
   },
   mounted() {
@@ -359,6 +365,14 @@ export default {
     this.initCarousle()
     this.initTabs()
     // this.initSelectData()
+    // 获取menu
+    commonAPI.getHomeMenu().then(res => {
+      if (res.data.flag === 'SUCCESS') {
+        this.homeMenu = res.data.data
+      } else {
+        this.$message.error(res.data.msg)
+      }
+    })
   },
   methods: {
     // 初始化下拉值

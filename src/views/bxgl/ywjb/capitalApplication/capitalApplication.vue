@@ -44,6 +44,8 @@
           :isShowIndex="false"
           :sortable="true"
           :tabType="currentTab.sourceCode"
+          :pageName="'capitaApplication'"
+          :pageType="'capitaApplication'"
           :homeMenu="homeMenu"
         ></arTable>
       </div>
