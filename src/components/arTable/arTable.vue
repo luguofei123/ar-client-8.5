@@ -34,7 +34,7 @@
             </template>
             <!-- 我的报销等其他页面的操作栏-->
             <template v-if="pageType === 'list'">
-              <optExp :scope="scope" :homeMenu="homeMenu" :tabType="tabType" :pageName="pageName"></optExp>
+              <optExp :scope="scope" :homeMenu="homeMenu" :pageName="pageName" :currentTab="currentTab"></optExp>
             </template>
           </div>
         </template>
@@ -68,7 +68,8 @@ export default {
     'pageType',
     'pageName',
     'tabType',
-    'homeMenu'
+    'homeMenu',
+    'currentTab'
   ],
   methods: {
     tdChange(obj) {

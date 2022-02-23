@@ -8,7 +8,9 @@ export const operationButton = {
     props: {
         scope: {},
         homeMenu: [],
-        tabType: ''
+        tabType: '',
+        currentTab: {},
+        pageName: ''
     },
     created() {
         this.commonData = this.$getCommonData
