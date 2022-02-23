@@ -30,8 +30,8 @@ export const getCommonData = () => {
     _commonData = {
       svAcctCode: "001",
       svAcctName: "行政账",
-      svAgencyCode: "006002001",
-      svAgencyName: "基层单位L1",
+      svAgencyCode: "999001",
+      svAgencyName: "汉东省水利厅本级",
       svDistCode: "000000",
       svDistName: "默认区划",
       svFiscalPeriod: "2",
@@ -39,17 +39,17 @@ export const getCommonData = () => {
       svMenuId: null,
       svRgCode: "87",
       svRgName: "",
-      svRoleCode: "140001",
-      svRoleId: "9588",
-      svRoleName: "报销制单岗（AR)",
+      svRoleCode: "999001",
+      svRoleId: "9516",
+      svRoleName: "经办人",
       svSetYear: "2022",
-      svSnum: "1",
-      svSysDate: "2022-02-09 16:18:06",
-      svTransDate: "2022-02-09",
-      svUserCode: "AR01",
-      svUserId: "9702",
-      svUserName: "AR01-报销制单",
-      token: "27403029"
+      svSnum: "2",
+      svSysDate: "2022-02-23 14:09:03",
+      svTransDate: "2022-02-23",
+      svUserCode: "cwy999",
+      svUserId: "9522",
+      svUserName: "侯彦",
+      token: "742862314"
     }
   }
   return _commonData

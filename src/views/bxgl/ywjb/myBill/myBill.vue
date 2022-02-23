@@ -1,6 +1,6 @@
 <template>
   <div>
-    <arListTable></arListTable>
+    <arListTable pageName="AR_BILL"> </arListTable>
   </div>
 </template>
 <script>
@@ -17,5 +17,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

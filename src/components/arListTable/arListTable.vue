@@ -39,7 +39,7 @@
           :sortable="true"
           :isSettingColumn="true"
           :pageType="'list'"
-          :pageName="'AR_BILL'"
+          :pageName="pageName"
           :homeMenu="homeMenu"
           :currentTab="currentTab"
         ></arTable>
@@ -76,7 +76,7 @@ import { arList } from './arListTableAPI'
 import { commonAPI } from '../../service/api/commonAPI'
 
 export default {
-  props: {},
+  props: ['pageName'],
   data() {
     return {
       commonData: {},
@@ -421,7 +421,7 @@ export default {
       })
     },
     initTabs() {
-      arList.getTabAndCol().then(res => {
+      arList.getTabAndCol(this.pageName).then(res => {
         if (res.data.flag === 'SUCCESS' && res.data.data.hasTab) {
           this.tabList = res.data.data.tabs
           this.currentTab = this.tabList[0]
