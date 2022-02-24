@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { commonAPI } from '../../service/api/commonAPI'
 import { arBillAPI } from './arBillAPI'
 const headAre = () => import('./headAre/headAre.vue')
 const baseAre = () => import('./baseAre/baseAre.vue')
@@ -56,19 +57,43 @@ export default {
   data() {
     return {
       commonData: {},
+      systemData: {},
+      routeQuery: {},
       tplData: {},
       showRightSideFlag: true
     }
   },
   props: {},
   created() {
+    // 获取登录信息
     this.commonData = this.$getCommonData
+    // 获取系统数据
+    commonAPI.getAllSysConfig().then(res => {
+      if (res.data.flag === 'SUCCESS') {
+        this.systemData = res.data.data
+      }
+    })
+    // 获取查询参数
+    this.routeQuery = this.getRouteQuery()
   },
   mounted() {
     this.initTemplate()
   },
   watch: {},
   methods: {
+    // 获取url上的参数
+    getRouteQuery() {
+      let obj = {}
+      if (this.$route.query) {
+        let objQuery = this.$route.query
+        let obj = {}
+        Object.keys(objQuery).forEach(key => {
+          obj[key] = objQuery[key]
+        })
+        return obj
+      }
+      return obj
+    },
     initTemplate() {
       let params = {
         billId: '',

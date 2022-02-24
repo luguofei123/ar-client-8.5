@@ -11,4 +11,8 @@ export const commonAPI = {
   getHomeMenu(){
     return myAxios.get('/sysset/arsysdatasource/getSourceInfoByTabName/HOME_MENU')
   },
+  // 获取系统设置信息
+  getAllSysConfig(){
+    return myAxios.get('/sysset/arsyssetup/getAllSysConfig')
+  }
 }
