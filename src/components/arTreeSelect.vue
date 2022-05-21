@@ -24,6 +24,7 @@
             @node-click="handleNodeClick"
             :node-key="defaultProps.id"
             :props="defaultProps"
+            style="height: 200px; padding-top: 10px"
           >
           </el-tree>
         </el-scrollbar>

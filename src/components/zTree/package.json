@@ -1,0 +1,50 @@
+{
+  "name": "zTree",
+  "version": "1.0.0",
+  "data": [
+    {
+      "code": "a",
+      "name": "xx请款单11",
+      "title": "xx请款单11",
+      "isLeaf": "N",
+      "id": "1",
+      "isParent": true,
+      "sonList": [
+        {
+          "id": "11",
+          "pId": "1",
+          "code": "aa",
+          "name": "填报样式",
+          "title": "填报样式",
+          "isLeaf": "Y",
+          "isParent": false
+        },
+        {
+          "id": "12",
+          "pId": "1",
+          "code": "bb",
+          "name": "审批样式",
+          "title": "审批样式",
+          "isLeaf": "Y",
+          "isParent": false
+        }
+      ]
+    },
+    {
+      "code": "b",
+      "name": "xx请款单12",
+      "title": "xx请款单12",
+      "isLeaf": "N",
+      "id": "2",
+      "isParent": true
+    },
+    {
+      "code": "c",
+      "name": "xx请款单13",
+      "title": "xx请款单13",
+      "isLeaf": "N",
+      "id": "c",
+      "isParent": true
+    }
+  ]
+}

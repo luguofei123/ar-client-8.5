@@ -4,8 +4,8 @@ module.exports = {
   publicPath: '/A/ar/resources/',
   outputDir: 'dist',
   assetsDir: 'assets',
-  pages:{
-    index:{
+  pages: {
+    index: {
       entry: 'src/main.js',
       template: path.resolve(__dirname, 'public/index.html'),
       filename: 'index.html',
@@ -28,11 +28,11 @@ module.exports = {
   productionSourceMap: false,
   crossorigin: undefined,
   integrity: false,
-  devServer:{
+  devServer: {
     port: 8085,
     proxy: {
       '/A/ar/api/': {
-        target: 'http://10.16.24.100/',
+        target: 'http://10.16.21.7:9600/',
         changeOrigin: true,
         secure: false
       },

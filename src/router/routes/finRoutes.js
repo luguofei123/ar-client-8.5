@@ -5,37 +5,42 @@ const applysBill = r => require.ensure([], () => r(require('@/views/bxgl/applysB
 const expenseBill = r => require.ensure([], () => r(require('@/views/bxgl/expenseBill')), 'expenseBill') // 报销单
 const loanBill = r => require.ensure([], () => r(require('@/views/bxgl/loanBill')), 'loanBill') // 借款单
 const repayBill = r => require.ensure([], () => r(require('@/views/bxgl/repayBill')), 'repayBill') // 还款单
-
+const zteePage = r => require.ensure([], () => r(require('@/views/testPage/ztreePage')), 'repayBill') // 还款单
 const finRoutes = [
   {
     path: '/capitalApplication',
-    name:'capitalApplication',
+    name: 'capitalApplication',
     component: capitalApplication
   },
   {
     path: '/myBill',
-    name:'myBill',
+    name: 'myBill',
     component: myBill
   },
   {
     path: '/applysBill',
-    name:'applysBill',
+    name: 'applysBill',
     component: applysBill
   },
   {
     path: '/expenseBill',
-    name:'expenseBill',
+    name: 'expenseBill',
     component: expenseBill
   },
   {
     path: '/loanBill',
-    name:'loanBill',
+    name: 'loanBill',
     component: loanBill
   },
   {
     path: '/repayBill',
-    name:'repayBill',
+    name: 'repayBill',
     component: repayBill
+  },
+  {
+    path: '/zteePage',
+    name: 'zteePage',
+    component: zteePage
   }
 ]
 export default finRoutes
