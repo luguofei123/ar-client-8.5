@@ -1,5 +1,5 @@
 const path = require('path')
-
+const webpack = require('webpack')
 module.exports = {
   publicPath: '/A/ar/resources/',
   outputDir: 'dist',
@@ -37,5 +37,15 @@ module.exports = {
         secure: false
       },
     }
-  }
+  },
+  configureWebpack: config => {
+    config.plugins = config.plugins.concat([
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jquery: 'jquery',
+        'window.jQuery': 'jquery',
+        jQuery: 'jquery'
+      })
+    ])
+  },
 }

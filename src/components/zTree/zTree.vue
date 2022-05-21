@@ -1,19 +1,28 @@
 <template>
-  <div class="ztree-component">
-    <div class="tree-search" v-show="isShowSearch">
+  <div>
+    <div v-show="isShowSearch">
       <el-input v-model="likeName" placeholder="请输入关键字" @change="searchTree">
         <i slot="suffix" class="iconfont iconsousuo" @click="searchTree"></i>
       </el-input>
     </div>
-    <div class="tree-list">
-      <div class="ztree" :id="treeId"></div>
+    <div class="">
+      <div class="" :id="treeId"></div>
     </div>
   </div>
 </template>
 
 <script>
-import $ from 'jquery'
-import axios from 'axios'
+// import 'ztree'
+// import './assets/zTree/css/metroStyle/metroStyle.css'
+// 	import './assets/zTree/js/jquery-1.4.4.min.js'
+// 	import './assets/zTree/js/jquery.ztree.all.js'
+// 	import './assets/zTree/js/jquery.ztree.exhide.js'
+
+import 'ztree/css/metroStyle/metroStyle.css'
+import 'ztree/js/jquery.ztree.all'
+import 'ztree/js/jquery.ztree.exhide.js'
+
+import myAxios from '@/service/http'
 
 export default {
   name: 'zTree',
@@ -58,7 +67,8 @@ export default {
           onExpand: this.onExpand
         },
         ...this.settingTree
-      }
+      },
+      nodes: []
     }
   },
   props: {
@@ -145,7 +155,21 @@ export default {
   created() {},
   methods: {
     searchTree() {
-      this.initTree(this.treeData)
+      if (!this.likeName) {
+        this.initTree(this.treeData)
+      } else {
+        // this.searchFun(this.likeName)
+        $.fn.zTree.init($('#' + this.treeId), this.setting, this.treeNodes)
+        this.zTreeObj = $.fn.zTree.getZTreeObj(this.treeId)
+
+        if (this.showAll) {
+          this.zTreeObj.expandNode(this.zTreeObj.getNodeByParam('id', '-1'))
+        }
+
+        this.$nextTick(() => {
+          this.searchFun(this.likeName, null, true)
+        })
+      }
     },
     // 初始化树节点
     initTree(data) {
@@ -154,7 +178,7 @@ export default {
       // this.zTreeObj.expandAll(true)
       // 如果传了url，就调用接口，否则就走数据
       if (this.url) {
-        axios
+        myAxios
           .get(this.url, {
             params: this.params
           })
@@ -166,6 +190,7 @@ export default {
                 item.isParent = item[this.children] && item[this.children].length > 0 ? true : false
               })
               this.$nextTick(() => {
+                debugger
                 $.fn.zTree.init($('#' + this.treeId), this.setting, this.treeNodes)
                 this.zTreeObj = $.fn.zTree.getZTreeObj(this.treeId)
 
@@ -177,7 +202,7 @@ export default {
               })
             }
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error)
           })
       } else {
@@ -243,7 +268,168 @@ export default {
     },
     removeHoverDom(treeId, treeNode) {
       this.$emit('removeHoverDom', treeId, treeNode, this.zTreeObj)
+    },
+    // 以下是模糊匹配的方法
+    searchFun(val, isHighLight, isExpand) {
+      var key = val.replace(/(^\s*)|(\s*$)/g, '')
+      this.nodesShow = []
+      isHighLight = isHighLight === false ? false : true
+      isExpand = isExpand ? true : false
+      // var nodes = this.zTreeObj.transformToArray(this.zTreeObj.getNodes())
+      let allNodes = this.zTreeObj.transformToArray(this.zTreeObj.getNodes())
+
+      this.filterzTree(key, allNodes, isExpand, isHighLight)
+      if (this.keyValue === '') {
+        this.noData = false
+      } else {
+        if (this.nodesShow.length === 0) {
+          this.noData = true
+        } else {
+          this.noData = false
+        }
+      }
+      this.showNodesFun(this.nodesShow, key)
+    },
+    // queryFun(node) {
+    //   for (var i in node) {
+    //     this.nodes.push(node[i])
+    //     if (node[i][this.children] && node[i][this.children].length > 0) {
+    //       this.queryFun(node[i].children)
+    //     }
+    //   }
+    //   return this.nodes
+    // },
+    filterzTree(key, nodes, isExpand, isHighLight) {
+      var metaChar = '[\\[\\]\\\\^\\$\\.\\|\\?\\*\\+\\(\\)]'
+      var rexMeta = new RegExp(metaChar, 'gi')
+      var nameKey = 'name'
+      for (var i = 0; i < nodes.length; i++) {
+        debugger
+        if (nodes[i] && nodes[i].oldname && nodes[i].oldname.length > 0) {
+          debugger
+          nodes[i][nameKey] = nodes[i].oldname
+        }
+        this.zTreeObj.updateNode(nodes[i])
+        if (key === '') {
+          this.initzTree()
+          break
+        } else {
+          if (nodes[i][nameKey] && nodes[i][nameKey].toLowerCase().indexOf(key.toLowerCase()) !== -1 && nodes[i].isLeaf === 'Y') {
+            if (isHighLight) {
+              var newKeywords = key.replace(rexMeta, matchStr => {
+                return '//' + matchStr
+              })
+              nodes[i].oldname = nodes[i][nameKey]
+              var rexGlobal = new RegExp(newKeywords, 'gi')
+              debugger
+              nodes[i][nameKey] = nodes[i].oldname.replace(rexGlobal, originalText => {
+                var highLightText = '<span style="color: whitesmoke;background-color: darkred;">' + originalText + '</span>'
+                // name = setting.view.nameIsHTML ? nameStr : nameStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return highLightText
+              })
+              this.zTreeObj.updateNode(nodes[i])
+            }
+            this.zTreeObj.showNode(nodes[i])
+            this.nodesShow.push(nodes[i])
+          } else {
+            this.zTreeObj.hideNode(nodes[i])
+          }
+        }
+      }
+    },
+    showNodesFun(nodesShow, key) {
+      if (key.length > 0) {
+        nodesShow.forEach(node => {
+          var pathOfOne = node.getPath()
+          if (pathOfOne && pathOfOne.length > 0) {
+            for (var i = 0; i < pathOfOne.length - 1; i++) {
+              this.zTreeObj.showNode(pathOfOne[i])
+              this.zTreeObj.expandNode(pathOfOne[i], true)
+            }
+          }
+        })
+      } else {
+        var rootNodes = this.zTreeObj.getNodesByParam('level', '0')
+        rootNodes.forEach(node => {
+          this.zTreeObj.expandNode(node, true)
+        })
+      }
     }
+
+    // searchFun(value) {
+    //   let allNode = this.zTreeObj.transformToArray(this.zTreeObj.getNodes())
+    //   this.zTreeObj.hideNodes(allNode) //隐藏所有节点
+    //   let hiddenNodes = this.zTreeObj.getNodesByParamFuzzy('name', value, null) //搜索含有value关键字的节点
+    //   hiddenNodes = this.zTreeObj.transformToArray(hiddenNodes) //转化为数组
+    //   for (let n in hiddenNodes) {
+    //     //遍历
+    //     this.findParent(this.zTreeObj, hiddenNodes[n], hiddenNodes) //找到其父节点
+    //   }
+    //   this.zTreeObj.showNodes(hiddenNodes) //显示满足的所有节点
+    //   this.highlightAndExpand_ztree(hiddenNodes)
+    // },
+    // findParent(treeObj, node, hiddenNodes) {
+    //   treeObj.expandNode(node, true, true, true) //展开treeObj中所有节点并获得焦点
+    //   let pNode = node.getParentNode() //获取父节点
+    //   this.findNextNode(node, hiddenNodes) //后一个节点
+    //   this.findPreNode(node, hiddenNodes) //前一个节点
+    //   if (pNode != null) {
+    //     hiddenNodes.push(pNode) //
+    //     this.findParent(treeObj, pNode, hiddenNodes) //递归查询上上一级父节点
+    //   }
+    // },
+    // findNextNode(node, hiddenNodes) {
+    //   let nextNode = node.getNextNode()
+    //   if (nextNode != null) {
+    //     if (nextNode.level === 1) {
+    //       return
+    //     }
+    //     hiddenNodes.push(nextNode)
+    //     let children = nextNode[this.children]
+    //     if (children) {
+    //       for (let i in children) {
+    //         hiddenNodes.push(children[i])
+    //       }
+    //     }
+    //     this.findNextNode(nextNode, hiddenNodes) //递归获取
+    //   }
+    // },
+    // findPreNode(node, hiddenNodes) {
+    //   let preNode = node.getPreNode()
+    //   if (preNode != null) {
+    //     if (preNode.level === 1) {
+    //       return
+    //     }
+    //     hiddenNodes.push(preNode)
+    //     let children = preNode[this.children] //获取节点的子节点集合
+    //     if (children) {
+    //       for (let i in children) {
+    //         hiddenNodes.push(children[i])
+    //       }
+    //     }
+    //     this.findPreNode(preNode, hiddenNodes)
+    //   }
+    // },
+    // highlightAndExpand_ztree(highlightNodes) {
+    //   debugger
+    //   //先把全部节点更新为普通样式
+    //   for (let i = 0; i < highlightNodes.length; i++) {
+    //     highlightNodes[i].highlight = false
+    //     this.zTreeObj.updateNode(highlightNodes[i])
+    //   }
+    //   //把指定节点的样式更新为高亮显示，并展开
+    //   if (highlightNodes != null) {
+    //     for (let i = 0; i < highlightNodes.length; i++) {
+    //       //高亮显示节点，并展开
+    //       highlightNodes[i].highlight = true
+    //       let t = highlightNodes[i].name
+    //       t = "<span style='color:red'>" + t + '</span>' //改变颜色
+    //       highlightNodes[i].name = t
+    //       this.zTreeObj.updateNode(highlightNodes[i]) //执行修改
+    //       this.zTreeObj.expandNode(highlightNodes[i], true, true, true)
+    //     }
+    //   }
+    // }
   },
   watch: {
     treeData: {

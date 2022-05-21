@@ -2,16 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import jquery from 'jquery'
+
 import '@/commonUtils/filter/filter.js'
-// import '@/commonUtils/directives/directives.js'
-window.jquery = window.$ = jquery
+import '@/commonUtils/directives/directives.js'
 // 引入全局样式
 import '@/assets/css/reset.scss'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/common.scss'
 import { UxGrid, UxTableColumn } from 'umy-ui' // umy表格
-import {getCommonData} from './service/api/commonData'
+import { getCommonData } from './service/api/commonData'
 Vue.prototype.$getCommonData = getCommonData()
 Vue.use(UxGrid)
 Vue.use(UxTableColumn)

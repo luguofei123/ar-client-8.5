@@ -1,6 +1,6 @@
 <template>
   <div class="ztree">
-    <z-tree></z-tree>
+    <z-tree ref="zTree" :url="roleTreeUrl" :params="roleTreeParams" :children="'child'" :name="'name'"> </z-tree>
   </div>
 </template>
 
@@ -9,7 +9,10 @@ import zTree from '@/components/zTree/zTree'
 export default {
   name: 'editTable',
   data() {
-    return {}
+    return {
+      roleTreeUrl: '/sysset/menuButtonNew/getButtonRoleTree',
+      roleTreeParams: {}
+    }
   },
   props: [],
   methods: {},
